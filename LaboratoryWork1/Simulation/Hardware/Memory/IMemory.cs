@@ -9,7 +9,8 @@ namespace Simulation.Hardware
     public interface IMemory {
         string Title { get; }
         double Capacity { get; }
-        double FreeSpace { get; set; }
+        double FreeSpace { get; }
+        double UsedSpace { get; set; }
         bool Format();
     }
 }
