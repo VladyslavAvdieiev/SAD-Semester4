@@ -20,7 +20,7 @@ namespace Simulation.Hardware
             set {
                 if (value < 0 || value > Capacity) {
                     OnErrorOccurred?.Invoke(this, new MemoryEventArgs("There is not enough memory"));
-                    throw new OutOfMemoryException();
+                    throw new ArgumentOutOfRangeException();
                 }
                 OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has been changed"));
                 _usedSpace = value;
