@@ -33,9 +33,17 @@ namespace Simulation.Hardware
         }
 
         public bool Format() {
+            if (IsEmpty()) {
+                OnErrorOccurred?.Invoke(this, new MemoryEventArgs("The drive has already formatted"));
+                return false;
+            }
             UsedSpace = 0d;
             OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has formatted"));
             return true;
+        }
+
+        private bool IsEmpty() {
+            return UsedSpace == 0d;
         }
     }
 }
