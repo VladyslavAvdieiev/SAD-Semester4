@@ -29,6 +29,7 @@ namespace Simulation.Hardware
         public RAM(string title, double capacity) {
             Title = title;
             Capacity = capacity;
+            FreeSpace = capacity;
         }
 
         public bool Format() {

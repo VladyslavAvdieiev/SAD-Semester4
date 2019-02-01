@@ -29,10 +29,11 @@ namespace Simulation.Hardware
         public SSD(string title, double capacity) {
             Title = title;
             Capacity = capacity;
+            FreeSpace = capacity;
         }
 
         public bool Format() {
-            FreeSpace = 0d;
+            FreeSpace = Capacity;
             OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has formatted"));
             return true;
         }
