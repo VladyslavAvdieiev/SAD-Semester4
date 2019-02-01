@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hardware\Battery\IBattery.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
     <Compile Include="Hardware\Memory\IInternalMemory.cs" />
@@ -51,7 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Hardware\Battery\" />
     <Folder Include="Hardware\CPU\" />
     <Folder Include="Hardware\Devices\" />
     <Folder Include="Software\OS\" />
