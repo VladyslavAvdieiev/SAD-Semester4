@@ -47,6 +47,7 @@
     <Compile Include="Hardware\Memory\IMemory.cs" />
     <Compile Include="Hardware\Memory\MemoryEventArgs.cs" />
     <Compile Include="Hardware\Memory\RAM.cs" />
+    <Compile Include="Hardware\Memory\SSD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
