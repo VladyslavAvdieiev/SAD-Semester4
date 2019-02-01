@@ -11,5 +11,6 @@ namespace Simulation.Hardware
         int Cores { get; }
         double Frequency { get; }
         double PowerUsage { get; }
+        double MemoryUsage { get; }
     }
 }
