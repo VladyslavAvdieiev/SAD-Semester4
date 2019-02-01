@@ -22,7 +22,7 @@ namespace Simulation.Hardware
                     OnErrorOccurred?.Invoke(this, new MemoryEventArgs("There is not enough memory"));
                     throw new OutOfMemoryException();
                 }
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has changed"));
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has been changed"));
                 _usedSpace = value;
             }
         }
@@ -34,11 +34,11 @@ namespace Simulation.Hardware
 
         public bool Format() {
             if (IsEmpty()) {
-                OnErrorOccurred?.Invoke(this, new MemoryEventArgs("The drive has already formatted"));
+                OnErrorOccurred?.Invoke(this, new MemoryEventArgs("The drive had been formatted"));
                 return false;
             }
             UsedSpace = 0d;
-            OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has formatted"));
+            OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been formatted"));
             return true;
         }
 

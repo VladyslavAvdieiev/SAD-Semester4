@@ -22,7 +22,7 @@ namespace Simulation.Hardware
                     OnErrorOccurred?.Invoke(this, new MemoryEventArgs("There is not enough memory"));
                     throw new OutOfMemoryException();
                 }
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has changed"));
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has been changed"));
                 _usedSpace = value;
             }
         }
