@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulation.Hardware
 {
-    public class HDD : IInternalMemory {
+    public class HDD : IExternalStorage {
         private double _freeSpace;
 
         public event EventHandler<MemoryEventArgs> OnSpaceChanged;
