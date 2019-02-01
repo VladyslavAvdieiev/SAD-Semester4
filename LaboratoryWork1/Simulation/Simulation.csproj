@@ -58,9 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Software\OS\OS.cs" />
     <Compile Include="Software\OS\IOS.cs" />
+    <Compile Include="Software\Program\IProgram.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Software\Program\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
