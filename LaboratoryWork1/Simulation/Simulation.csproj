@@ -41,13 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hardware\Memory\IExternalStorage.cs" />
+    <Compile Include="Hardware\Memory\IInternalMemory.cs" />
+    <Compile Include="Hardware\Memory\IMemory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hardware\Battery\" />
     <Folder Include="Hardware\CPU\" />
     <Folder Include="Hardware\Devices\" />
-    <Folder Include="Hardware\Memory\" />
     <Folder Include="Software\OS\" />
     <Folder Include="Software\Program\" />
   </ItemGroup>
