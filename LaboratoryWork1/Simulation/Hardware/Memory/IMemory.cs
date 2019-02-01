@@ -10,5 +10,6 @@ namespace Simulation.Hardware
         string Title { get; }
         double Capacity { get; }
         double FreeSpace { get; set; }
+        bool Format();
     }
 }

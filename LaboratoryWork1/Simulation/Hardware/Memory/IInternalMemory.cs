@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Simulation.Hardware
 {
-    public interface IInternalMemory {
+    public interface IInternalMemory : IMemory {
         string Title { get; }
         double Capacity { get; }
         double FreeSpace { get; set; }
+        bool Format();
     }
 }
