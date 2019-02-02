@@ -30,6 +30,10 @@ namespace Simulation.Software
         }
 
         public bool Start() {
+            if (InProgress) {
+                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("The program is already in progress"));
+                return false;
+            }
             if (NeedsNetwork && !_owner.HasNetworkConnection) {
                 OnErrorOccurred?.Invoke(this, new ProgramEventArgs("There were troubles with network connection"));
                 return false;
