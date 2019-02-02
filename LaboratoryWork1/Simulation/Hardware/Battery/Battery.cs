@@ -19,7 +19,7 @@ namespace Simulation.Hardware
             get => _freeCharge;
             set {
                 if (value < 0 || value > Capacity) {
-                    OnErrorOccurred?.Invoke(this, new BatteryEventArgs("Argument is out of range of capacity"));
+                    OnErrorOccurred?.Invoke(this, new BatteryEventArgs("Battery run out"));
                     throw new ArgumentOutOfRangeException();
                 }
                 OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed"));
