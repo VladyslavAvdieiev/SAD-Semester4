@@ -38,6 +38,10 @@ namespace Simulation.Software
                 OnErrorOccurred?.Invoke(this, new ProgramEventArgs("There were troubles with network connection"));
                 return false;
             }
+            if (_owner.InProgress) {
+                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Program cannot start while device is not processing"));
+                return false;
+            }
             InProgress = true;
             OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program started working"));
             return true;
