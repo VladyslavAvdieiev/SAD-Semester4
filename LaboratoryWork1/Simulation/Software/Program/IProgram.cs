@@ -8,8 +8,8 @@ namespace Simulation.Software
 {
     public interface IProgram {
         string Title { get; }
-        double PowerUsage { get; }
         bool NeedsNetwork { get; }
+        double PowerUsage { get; }
         double MemoryUsage { get; }
         bool Start();
         bool Stop();
