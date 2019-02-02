@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Simulation.Hardware
 {
     public class RAM : IInternalMemory {
-        private IDevice _owner;
         private double _usedSpace;
 
         public event EventHandler<MemoryEventArgs> OnSpaceChanged;
@@ -28,19 +27,14 @@ namespace Simulation.Hardware
             }
         }
 
-        public RAM(string title, double capacity, IDevice owner) {
+        public RAM(string title, double capacity) {
             Title = title;
             Capacity = capacity;
-            _owner = owner;
         }
 
         public bool Format() {
             if (IsEmpty()) {
                 OnErrorOccurred?.Invoke(this, new MemoryEventArgs("The drive had been formatted"));
-                return false;
-            }
-            if (_owner.InProgress) {
-                OnErrorOccurred?.Invoke(this, new MemoryEventArgs("Internal memory cannot be formatted while device is processing"));
                 return false;
             }
             UsedSpace = 0d;
