@@ -13,12 +13,14 @@ namespace Simulation.Hardware
         public double PowerUsage { get; }
         public double MemoryUsage { get; }
 
-        public CPU(string title, int cores, double frequency, double powerUsage, double memoryUsage) {
+        public CPU(string title, int cores, double frequency, double memoryUsage) {
             Title = title;
             Cores = cores;
             Frequency = frequency;
-            PowerUsage = powerUsage;
             MemoryUsage = memoryUsage;
+            PowerUsage = Frequency * Cores / 10;    // Frequency = 2.8
+                                                    // Cores = 4
+                                                    // PowerUsage = 2.8 * 4 / 10 = 1.12 per second
         }
     }
 }
