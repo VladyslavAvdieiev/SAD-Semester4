@@ -8,6 +8,7 @@ namespace Simulation.Software
 {
     public interface IProgram {
         string Title { get; }
+        bool InProgress { get; }
         bool NeedsNetwork { get; }
         double PowerUsage { get; }
         double MemoryUsage { get; }
