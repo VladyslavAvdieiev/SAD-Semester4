@@ -12,6 +12,7 @@ namespace Simulation.Software
         bool NeedsNetwork { get; }
         double PowerUsage { get; }
         double MemoryUsage { get; }
+        double Storage { get; }
         bool Start();
         bool Stop();
     }

@@ -18,12 +18,14 @@ namespace Simulation.Software
         public bool InProgress { get; private set; }
         public double PowerUsage { get; }
         public double MemoryUsage { get; }
+        public double Storage { get; }
 
-        public Program(string title, bool needsNetwork, double powerUsage, double memoryUsage, IDevice owner) {
+        public Program(string title, bool needsNetwork, double powerUsage, double memoryUsage, double storage, IDevice owner) {
             Title = title;
             NeedsNetwork = needsNetwork;
             PowerUsage = powerUsage;
             MemoryUsage = memoryUsage;
+            Storage = storage;
             _owner = owner;
         }
 
