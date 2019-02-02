@@ -61,6 +61,7 @@
     <Compile Include="Software\OS\IOS.cs" />
     <Compile Include="Software\Program\IProgram.cs" />
     <Compile Include="Software\Program\Program.cs" />
+    <Compile Include="Software\Program\ProgramEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
