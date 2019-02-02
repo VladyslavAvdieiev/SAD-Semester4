@@ -46,9 +46,11 @@
     <Compile Include="Hardware\Battery\IBattery.cs" />
     <Compile Include="Hardware\CPU\CPU.cs" />
     <Compile Include="Hardware\CPU\ICPU.cs" />
+    <Compile Include="Hardware\Devices\DeviceEventArgs.cs" />
     <Compile Include="Hardware\Devices\ExternalDevice.cs" />
     <Compile Include="Hardware\Devices\IDevice.cs" />
     <Compile Include="Hardware\Devices\IExternalDevice.cs" />
+    <Compile Include="Hardware\Devices\PersonalComputer.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
     <Compile Include="Hardware\Memory\IInternalMemory.cs" />
