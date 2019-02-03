@@ -82,7 +82,8 @@ namespace Simulation.Hardware
             total += OS.MemoryUsage;
             total += CPU.MemoryUsage;
             foreach (IProgram program in _programs)
-                total += program.MemoryUsage;
+                if (program.InProgress)
+                    total += program.MemoryUsage;
             return total;
         }
 
