@@ -50,7 +50,14 @@ namespace Simulation.Hardware
                 OnErrorOccurred?.Invoke(this, new DeviceEventArgs("There were troubles with electricity connection"));
                 return false;
             }
-            InProgress = true;
+            try {
+                InProgress = true;
+                RAM.UsedSpace = CountRAMUsage();
+            }
+            catch (ArgumentOutOfRangeException) {
+                InProgress = false;
+                return false;
+            }
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device started working"));
             return true;
         }
@@ -63,6 +70,15 @@ namespace Simulation.Hardware
             InProgress = false;
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device stopped working"));
             return true;
+        }
+
+        private double CountRAMUsage() {
+            double total = 0d;
+            total += OS.MemoryUsage;
+            total += CPU.MemoryUsage;
+            foreach (IProgram program in _programs)
+                total += program.MemoryUsage;
+            return total;
         }
     }
 }
