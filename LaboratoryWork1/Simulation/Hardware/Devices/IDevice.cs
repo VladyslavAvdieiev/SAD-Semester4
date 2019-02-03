@@ -12,7 +12,7 @@ namespace Simulation.Hardware
         bool InProgress { get; }
         IOS OS { get; }
         ICPU CPU { get; }
-        IBattery Battery { get; set; }
+        IBattery Battery { get; }
         IInternalMemory RAM { get; }
         IExternalStorage ExternalStorage { get; }
         IList<IProgram> Programs { get; }

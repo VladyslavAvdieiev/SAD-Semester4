@@ -19,7 +19,7 @@ namespace Simulation.Hardware
         public bool InProgress { get; private set; }
         public IOS OS { get; }
         public ICPU CPU { get; }
-        public IBattery Battery { get; set; }
+        public IBattery Battery { get; }
         public IInternalMemory RAM { get; }
         public IExternalStorage ExternalStorage { get; }
         public IList<IProgram> Programs { get => _programs.AsReadOnly(); }
