@@ -50,6 +50,7 @@
     <Compile Include="Hardware\Devices\ExternalDevice.cs" />
     <Compile Include="Hardware\Devices\IDevice.cs" />
     <Compile Include="Hardware\Devices\IExternalDevice.cs" />
+    <Compile Include="Hardware\Devices\Laptop.cs" />
     <Compile Include="Hardware\Devices\PersonalComputer.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
