@@ -42,11 +42,27 @@ namespace Simulation.Hardware
         }
 
         public bool TurnOn() {
-            throw new NotImplementedException();
+            if (InProgress) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device is already in progress"));
+                return false;
+            }
+            if (!HasElectricityConnection && Battery == null) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("There were troubles with electricity connection"));
+                return false;
+            }
+            InProgress = true;
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device started working"));
+            return true;
         }
 
         public bool TurnOff() {
-            throw new NotImplementedException();
+            if (!InProgress) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device is not in progress"));
+                return false;
+            }
+            InProgress = false;
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device stopped working"));
+            return true;
         }
     }
 }
