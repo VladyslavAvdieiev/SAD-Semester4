@@ -72,6 +72,7 @@ namespace Simulation.Hardware
             }
             InProgress = false;
             RAM.Format();
+            TurnOffPrograms();
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just stopped working"));
             return true;
         }
@@ -83,6 +84,12 @@ namespace Simulation.Hardware
             foreach (IProgram program in _programs)
                 total += program.MemoryUsage;
             return total;
+        }
+
+        private void TurnOffPrograms() {
+            foreach (IProgram program in _programs)
+                if (program.InProgress)
+                    program.Stop();
         }
 
         private void UseBattery() {
