@@ -48,7 +48,7 @@ namespace Simulation.Hardware
                 return false;
             }
             if (!HasElectricityConnection && Battery == null) {
-                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("There were troubles with electricity connection"));
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The electricity connection troubles have just appeared"));
                 return false;
             }
             try {
@@ -107,7 +107,7 @@ namespace Simulation.Hardware
 
         public bool Install(IProgram program) {
             if (_programs.Contains(program)) {
-                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The program had been installed"));
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such program is already installed"));
                 return false;
             }
             try {
@@ -134,7 +134,7 @@ namespace Simulation.Hardware
 
         public bool Connect(IExternalDevice externalDevice) {
             if (_externalDevices.Contains(externalDevice)) {
-                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device had been connected"));
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such device is already connected"));
                 return false;
             }
             _externalDevices.Add(externalDevice);

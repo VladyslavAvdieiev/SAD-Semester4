@@ -19,7 +19,7 @@ namespace Simulation.Hardware
             get => _freeCharge;
             set {
                 if (value < 0 || value > Capacity) {
-                    OnErrorOccurred?.Invoke(this, new BatteryEventArgs("Battery run out"));
+                    OnErrorOccurred?.Invoke(this, new BatteryEventArgs("The battery has just run out"));
                     throw new ArgumentOutOfRangeException();
                 }
                 OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed"));
@@ -35,7 +35,7 @@ namespace Simulation.Hardware
 
         public bool Charge() {
             if (IsFull()) {
-                OnErrorOccurred?.Invoke(this, new BatteryEventArgs("The battery is full"));
+                OnErrorOccurred?.Invoke(this, new BatteryEventArgs("The battery is already full"));
                 return false;
             }
             FreeCharge = Capacity;

@@ -35,15 +35,15 @@ namespace Simulation.Software
                 return false;
             }
             if (NeedsNetwork && !_owner.HasNetworkConnection) {
-                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("There were troubles with network connection"));
+                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Some network connection troubles have just appeared"));
                 return false;
             }
             if (_owner.InProgress) {
-                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Program cannot start while device is not processing"));
+                OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Program cannot start while device is not progressing"));
                 return false;
             }
             InProgress = true;
-            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program started working"));
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has started working"));
             return true;
         }
 
@@ -53,7 +53,7 @@ namespace Simulation.Software
                 return false;
             }
             InProgress = false;
-            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program stopped working"));
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working"));
             return true;
         }
     }
