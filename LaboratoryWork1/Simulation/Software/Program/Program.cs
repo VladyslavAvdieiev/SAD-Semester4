@@ -38,8 +38,14 @@ namespace Simulation.Software
                 OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Some network connection troubles have just appeared"));
                 return false;
             }
-            if (_owner.InProgress) {
+            if (!_owner.InProgress) {
                 OnErrorOccurred?.Invoke(this, new ProgramEventArgs("Program cannot start while device is not progressing"));
+                return false;
+            }
+            try {
+                _owner.RAM.UsedSpace += MemoryUsage;
+            }
+            catch (ArgumentOutOfRangeException) {
                 return false;
             }
             InProgress = true;
@@ -53,6 +59,7 @@ namespace Simulation.Software
                 return false;
             }
             InProgress = false;
+            _owner.RAM.UsedSpace -= MemoryUsage;
             OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working"));
             return true;
         }
