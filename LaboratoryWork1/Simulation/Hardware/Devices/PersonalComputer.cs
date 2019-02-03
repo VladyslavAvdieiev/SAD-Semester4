@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Simulation.Hardware
 {
@@ -58,6 +59,8 @@ namespace Simulation.Hardware
                 InProgress = false;
                 return false;
             }
+            if (!HasElectricityConnection)
+                Task.Run(() => UseBattery());
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device started working"));
             return true;
         }
@@ -80,6 +83,26 @@ namespace Simulation.Hardware
             foreach (IProgram program in _programs)
                 total += program.MemoryUsage;
             return total;
+        }
+
+        private void UseBattery() {
+            double total = 0d;
+            while (InProgress) {
+                Thread.Sleep(1000);
+                total = 0d;
+                total += CPU.PowerUsage;
+                foreach (IProgram program in _programs)
+                    if (program.InProgress)
+                        total += program.PowerUsage;
+                foreach (IExternalDevice device in _externalDevices)
+                    total += device.PowerUsage;
+                try {
+                    Battery.FreeCharge -= total;
+                }
+                catch (ArgumentOutOfRangeException) {
+                    TurnOff();
+                }
+            }
         }
     }
 }
