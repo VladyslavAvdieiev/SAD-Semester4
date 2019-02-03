@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 namespace Simulation.Hardware
 {
     public class PersonalComputer : IDevice {
+        private List<IProgram> _programs;
+        private List<IExternalDevice> _externalDevices;
+
         public event EventHandler<DeviceEventArgs> OnStatusChanged;
         public event EventHandler<DeviceEventArgs> OnErrorOccurred;
 
         public string Title { get; }
+        public bool InProgress { get; private set; }
         public IOS OS { get; }
         public ICPU CPU { get; }
         public IBattery Battery { get; set; }
         public IInternalMemory RAM { get; }
         public IExternalStorage ExternalStorage { get; }
-        public List<IProgram> Programs { get; }
-        public List<IExternalDevice> ExternalDevices { get; }
+        public IList<IProgram> Programs { get => _programs.AsReadOnly(); }
+        public IList<IExternalDevice> ExternalDevices { get => _externalDevices.AsReadOnly(); }
         public bool HasElectricityConnection { get; set; }
         public bool HasNetworkConnection { get; set; }
 
@@ -31,8 +35,18 @@ namespace Simulation.Hardware
             Battery = battery;
             RAM = ram;
             ExternalStorage = externalStorage;
+            _programs = new List<IProgram>();
+            _externalDevices = new List<IExternalDevice>();
             HasElectricityConnection = hasElectricityConnection;
             HasNetworkConnection = hasNetworkConnection;
+        }
+
+        public bool TurnOn() {
+            throw new NotImplementedException();
+        }
+
+        public bool TurnOff() {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,14 +9,17 @@ namespace Simulation.Hardware
 {
     public interface IDevice {
         string Title { get; }
+        bool InProgress { get; }
         IOS OS { get; }
         ICPU CPU { get; }
         IBattery Battery { get; set; }
         IInternalMemory RAM { get; }
         IExternalStorage ExternalStorage { get; }
-        List<IProgram> Programs { get; }
-        List<IExternalDevice> ExternalDevices { get; }
+        IList<IProgram> Programs { get; }
+        IList<IExternalDevice> ExternalDevices { get; }
         bool HasElectricityConnection { get; set; }
         bool HasNetworkConnection { get; set; }
+        bool TurnOn();
+        bool TurnOff();
     }
 }
