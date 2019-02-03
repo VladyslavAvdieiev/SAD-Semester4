@@ -61,7 +61,7 @@ namespace Simulation.Hardware
             }
             if (!HasElectricityConnection)
                 Task.Run(() => UseBattery());
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device started working"));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working"));
             return true;
         }
 
@@ -72,7 +72,7 @@ namespace Simulation.Hardware
             }
             InProgress = false;
             RAM.Format();
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device stopped working"));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just stopped working"));
             return true;
         }
 
@@ -106,19 +106,50 @@ namespace Simulation.Hardware
         }
 
         public bool Install(IProgram program) {
-            throw new NotImplementedException();
+            if (_programs.Contains(program)) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The program had been installed"));
+                return false;
+            }
+            try {
+                ExternalStorage.UsedSpace += program.Storage;
+            }
+            catch (ArgumentOutOfRangeException) {
+                return false;
+            }
+            _programs.Add(program);
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The program has been successfully installed"));
+            return true;
         }
 
         public bool Uninstall(IProgram program) {
-            throw new NotImplementedException();
+            if (!_programs.Contains(program)) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such program does not exist"));
+                return false;
+            }
+            ExternalStorage.UsedSpace -= program.Storage;
+            _programs.Remove(program);
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The program has been successfully uninstalled"));
+            return true;
         }
 
         public bool Connect(IExternalDevice externalDevice) {
-            throw new NotImplementedException();
+            if (_externalDevices.Contains(externalDevice)) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device had been connected"));
+                return false;
+            }
+            _externalDevices.Add(externalDevice);
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected"));
+            return true;
         }
 
         public bool Disconnect(IExternalDevice externalDevice) {
-            throw new NotImplementedException();
+            if (!_externalDevices.Contains(externalDevice)) {
+                OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such device does not exist"));
+                return false;
+            }
+            _externalDevices.Remove(externalDevice);
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected"));
+            return true;
         }
     }
 }
