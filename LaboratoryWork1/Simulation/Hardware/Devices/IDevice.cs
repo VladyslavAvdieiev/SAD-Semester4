@@ -21,5 +21,9 @@ namespace Simulation.Hardware
         bool HasNetworkConnection { get; set; }
         bool TurnOn();
         bool TurnOff();
+        bool Install(IProgram program);
+        bool Uninstall(IProgram program);
+        bool Connect(IExternalDevice externalDevice);
+        bool Disconnect(IExternalDevice externalDevice);
     }
 }

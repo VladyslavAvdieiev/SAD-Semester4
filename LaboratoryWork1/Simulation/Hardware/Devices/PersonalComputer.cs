@@ -104,5 +104,21 @@ namespace Simulation.Hardware
                 }
             }
         }
+
+        public bool Install(IProgram program) {
+            throw new NotImplementedException();
+        }
+
+        public bool Uninstall(IProgram program) {
+            throw new NotImplementedException();
+        }
+
+        public bool Connect(IExternalDevice externalDevice) {
+            throw new NotImplementedException();
+        }
+
+        public bool Disconnect(IExternalDevice externalDevice) {
+            throw new NotImplementedException();
+        }
     }
 }
