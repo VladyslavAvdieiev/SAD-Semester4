@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace Simulation.Hardware
 {
@@ -27,13 +26,12 @@ namespace Simulation.Hardware
         public bool HasElectricityConnection { get; set; }
         public bool HasNetworkConnection { get; set; }
 
-        public PersonalComputer(string title, IOS os, ICPU cpu, IBattery battery, IInternalMemory ram, 
+        public PersonalComputer(string title, IOS os, ICPU cpu, IInternalMemory ram, 
             IExternalStorage externalStorage, bool hasElectricityConnection, bool hasNetworkConnection)
         {
             Title = title;
             OS = os;
             CPU = cpu;
-            Battery = battery;
             RAM = ram;
             ExternalStorage = externalStorage;
             _programs = new List<IProgram>();
@@ -47,7 +45,7 @@ namespace Simulation.Hardware
                 OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device is already in progress"));
                 return false;
             }
-            if (!HasElectricityConnection && Battery == null) {
+            if (!HasElectricityConnection) {
                 OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The electricity connection troubles have just appeared"));
                 return false;
             }
@@ -59,8 +57,6 @@ namespace Simulation.Hardware
                 InProgress = false;
                 return false;
             }
-            if (!HasElectricityConnection)
-                Task.Run(() => UseBattery());
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working"));
             return true;
         }
@@ -90,26 +86,6 @@ namespace Simulation.Hardware
             foreach (IProgram program in _programs)
                 if (program.InProgress)
                     program.Stop();
-        }
-
-        private void UseBattery() {
-            double total = 0d;
-            while (InProgress) {
-                Thread.Sleep(1000);
-                total = 0d;
-                total += CPU.PowerUsage;
-                foreach (IProgram program in _programs)
-                    if (program.InProgress)
-                        total += program.PowerUsage;
-                foreach (IExternalDevice device in _externalDevices)
-                    total += device.PowerUsage;
-                try {
-                    Battery.FreeCharge -= total;
-                }
-                catch (ArgumentOutOfRangeException) {
-                    TurnOff();
-                }
-            }
         }
 
         public bool Install(IProgram program) {
