@@ -71,8 +71,8 @@ namespace Simulation.Hardware
                 return false;
             }
             InProgress = false;
-            RAM.Format();
             TurnOffPrograms();
+            RAM.Format();
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just stopped working"));
             return true;
         }
