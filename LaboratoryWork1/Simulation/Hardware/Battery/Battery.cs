@@ -8,9 +8,20 @@ using System.Threading.Tasks;
 namespace Simulation.Hardware
 {
     public class Battery : IBattery {
+        private double _currentCharge;
+
         public string Title { get; }
         public double Capacity { get; }
-        public double CurrentCharge { get; private set; }
+        public double CurrentCharge {
+            get => _currentCharge;
+            private set {
+                if (value < 0d)
+                    throw new BatteryRunOutException("The battery has just run out");
+                if (value > Capacity)
+                    value = Capacity;
+                _currentCharge = value;
+            }
+        }
 
         public event EventHandler<BatteryEventArgs> OnChargeChanged;
 
@@ -22,20 +33,15 @@ namespace Simulation.Hardware
 
         public void Use(double charge) {
             CurrentCharge -= charge;
-            if (CurrentCharge < 0d) {
-                CurrentCharge = 0d;
-                throw new BatteryRunOutException("The battery has just run out");
-            }
             OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed", Capacity, CurrentCharge));
         }
 
         public async Task Charge() {
             await Task.Run(() => {
-                while (CurrentCharge < Capacity) {
+                while (CurrentCharge != Capacity) {
                     Thread.Sleep(1000);
                     CurrentCharge += 100d;
                 }
-                CurrentCharge = Capacity;
                 OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Capacity, CurrentCharge));
             });
         }
