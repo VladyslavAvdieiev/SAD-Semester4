@@ -20,7 +20,7 @@ namespace Simulation.Hardware
             CurrentCharge = Capacity;
         }
 
-        public void Use(int charge) {
+        public void Use(double charge) {
             CurrentCharge -= charge;
             if (CurrentCharge < 0d) {
                 CurrentCharge = 0d;

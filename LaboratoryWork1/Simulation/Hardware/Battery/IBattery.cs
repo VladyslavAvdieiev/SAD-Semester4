@@ -10,7 +10,7 @@ namespace Simulation.Hardware
         string Title { get; }
         double Capacity { get; }
         double CurrentCharge { get; }
-        void Use(int charge);
+        void Use(double charge);
         Task Charge();
     }
 }
