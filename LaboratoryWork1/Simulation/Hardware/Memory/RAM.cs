@@ -16,9 +16,9 @@ namespace Simulation.Hardware
             get => _usedSpace;
             private set {
                 if (value < 0d)
-                    throw new Exception(); // different
+                    throw new DriveIsEmptyException("The drive is already empty");
                 if (value > Capacity)
-                    throw new Exception(); // different
+                    throw new NotEnoughMemoryException("There is not enough memory");
                 _usedSpace = value;
             }
         }

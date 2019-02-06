@@ -53,6 +53,8 @@
     <Compile Include="Hardware\Devices\IExternalDevice.cs" />
     <Compile Include="Hardware\Devices\Laptop.cs" />
     <Compile Include="Hardware\Devices\PersonalComputer.cs" />
+    <Compile Include="Hardware\Memory\Exceptions\DriveIsEmptyException.cs" />
+    <Compile Include="Hardware\Memory\Exceptions\NotEnoughMemoryException.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
     <Compile Include="Hardware\Memory\IInternalMemory.cs" />
