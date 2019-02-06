@@ -2,49 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Simulation.Hardware
 {
     public class Battery : IBattery {
-        private double _freeCharge;
-
-        public event EventHandler<BatteryEventArgs> OnChargeChanged;
-        public event EventHandler<BatteryEventArgs> OnErrorOccurred;
-
         public string Title { get; }
         public double Capacity { get; }
-        public double Percentage { get => 100 * FreeCharge / Capacity; }
-        public double FreeCharge {
-            get => _freeCharge;
-            set {
-                if (value < 0 || value > Capacity) {
-                    OnErrorOccurred?.Invoke(this, new BatteryEventArgs("The battery has just run out"));
-                    throw new ArgumentOutOfRangeException();
-                }
-                OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed"));
-                _freeCharge = value;
-            }
-        }
+        public double CurrentCharge { get; private set; }
+
+        public event EventHandler<BatteryEventArgs> OnChargeChanged;
 
         public Battery(string title, double capacity) {
             Title = title;
             Capacity = capacity;
-            FreeCharge = capacity;
+            CurrentCharge = Capacity;
         }
 
-        public bool Charge() {
-            if (IsFull()) {
-                OnErrorOccurred?.Invoke(this, new BatteryEventArgs("The battery is already full"));
-                return false;
+        public void Use(int charge) {
+            CurrentCharge -= charge;
+            if (CurrentCharge < 0d) {
+                CurrentCharge = 0d;
+                throw new Exception();
             }
-            FreeCharge = Capacity;
-            OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged"));
-            return true;
+            OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed", Capacity, CurrentCharge));
         }
 
-        private bool IsFull() {
-            return FreeCharge == Capacity;
+        public async Task Charge() {
+            await Task.Run(() => {
+                while (CurrentCharge < Capacity) {
+                    Thread.Sleep(1000);
+                    CurrentCharge += 100d;
+                }
+                CurrentCharge = Capacity;
+                OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Capacity, CurrentCharge));
+            });
         }
     }
 }

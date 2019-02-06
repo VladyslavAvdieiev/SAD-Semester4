@@ -9,8 +9,8 @@ namespace Simulation.Hardware
     public interface IBattery {
         string Title { get; }
         double Capacity { get; }
-        double Percentage { get; }
-        double FreeCharge { get; set; }
-        bool Charge();
+        double CurrentCharge { get; }
+        void Use(int charge);
+        Task Charge();
     }
 }

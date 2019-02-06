@@ -8,8 +8,12 @@ namespace Simulation.Hardware
 {
     public class BatteryEventArgs : EventArgs {
         public string Message { get; }
-        public BatteryEventArgs(string message) {
+        public double Capacity { get; }
+        public double CurrentCharge { get; }
+        public BatteryEventArgs(string message, double capacity, double currentCharge) {
             Message = message;
+            Capacity = capacity;
+            CurrentCharge = currentCharge;
         }
     }
 }
