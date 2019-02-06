@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Simulation.Hardware
@@ -9,41 +10,48 @@ namespace Simulation.Hardware
     public class HDD : IExternalStorage {
         private double _usedSpace;
 
-        public event EventHandler<MemoryEventArgs> OnSpaceChanged;
-        public event EventHandler<MemoryEventArgs> OnErrorOccurred;
-
         public string Title { get; }
         public double Capacity { get; }
-        public double FreeSpace { get => Capacity - UsedSpace; }
         public double UsedSpace {
             get => _usedSpace;
-            set {
-                if (value < 0 || value > Capacity) {
-                    OnErrorOccurred?.Invoke(this, new MemoryEventArgs("There is not enough memory"));
-                    throw new ArgumentOutOfRangeException();
-                }
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("Space has been changed"));
+            private set {
+                if (value < 0d)
+                    throw new Exception(); // different
+                if (value > Capacity)
+                    throw new Exception(); // different
                 _usedSpace = value;
             }
         }
+
+        public event EventHandler<MemoryEventArgs> OnSpaceChanged;
 
         public HDD(string title, double capacity) {
             Title = title;
             Capacity = capacity;
         }
 
-        public bool Format() {
-            if (IsEmpty()) {
-                OnErrorOccurred?.Invoke(this, new MemoryEventArgs("The drive is already formatted"));
-                return false;
-            }
-            UsedSpace = 0d;
-            OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been formatted"));
-            return true;
+        public async Task Load(double space) {
+            await Task.Run(() => {
+                Thread.Sleep(100);
+                UsedSpace += space;
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been loaded", Capacity, UsedSpace));
+            });
         }
 
-        private bool IsEmpty() {
-            return UsedSpace == 0d;
+        public async Task Unload(double space) {
+            await Task.Run(() => {
+                Thread.Sleep(100);
+                UsedSpace -= space;
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been unloaded", Capacity, UsedSpace));
+            });
+        }
+
+        public async Task Format() {
+            await Task.Run(() => {
+                Thread.Sleep(1000);
+                UsedSpace = 0d;
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been formatted", Capacity, UsedSpace));
+            });
         }
     }
 }

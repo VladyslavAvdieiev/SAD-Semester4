@@ -8,8 +8,12 @@ namespace Simulation.Hardware
 {
     public class MemoryEventArgs : EventArgs {
         public string Message { get; }
-        public MemoryEventArgs(string message) {
+        public double Capacity { get; }
+        public double UsedSpace { get; }
+        public MemoryEventArgs(string message, double capacity, double usedSpace) {
             Message = message;
+            Capacity = capacity;
+            UsedSpace = usedSpace;
         }
     }
 }
