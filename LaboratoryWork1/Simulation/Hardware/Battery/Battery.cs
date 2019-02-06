@@ -24,7 +24,7 @@ namespace Simulation.Hardware
             CurrentCharge -= charge;
             if (CurrentCharge < 0d) {
                 CurrentCharge = 0d;
-                throw new Exception();
+                throw new BatteryRunOutException("The battery has just run out");
             }
             OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed", Capacity, CurrentCharge));
         }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
+    <Compile Include="Hardware\Battery\BatteryRunOutException.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />
     <Compile Include="Hardware\CPU\CPU.cs" />
     <Compile Include="Hardware\CPU\ICPU.cs" />
