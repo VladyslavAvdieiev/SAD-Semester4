@@ -43,7 +43,7 @@ namespace Simulation.Software
                 return false;
             }
             try {
-                _owner.RAM.UsedSpace += MemoryUsage;
+                //_owner.RAM.UsedSpace += MemoryUsage;
             }
             catch (ArgumentOutOfRangeException) {
                 return false;
@@ -59,7 +59,7 @@ namespace Simulation.Software
                 return false;
             }
             InProgress = false;
-            _owner.RAM.UsedSpace -= MemoryUsage;
+            //_owner.RAM.UsedSpace -= MemoryUsage;
             OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working"));
             return true;
         }
