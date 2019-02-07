@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Simulation.Hardware
 {
     public class Battery : IBattery {
+        private IDevice _owner;
         private double _currentCharge;
 
         public string Title { get; }
@@ -26,10 +27,11 @@ namespace Simulation.Hardware
 
         public event EventHandler<BatteryEventArgs> OnChargeChanged;
 
-        public Battery(string title, double capacity) {
+        public Battery(string title, double capacity, IDevice owner) {
             Title = title;
             Capacity = capacity;
             CurrentCharge = Capacity;
+            _owner = owner;
         }
 
         public void Use(double charge) {
@@ -41,6 +43,8 @@ namespace Simulation.Hardware
             await Task.Run(() => {
                 while (CurrentCharge != Capacity) {
                     Thread.Sleep(1000);
+                    if (!_owner.HasElectricityConnection)
+                        throw new NoElectricityConnectionException("There is no electricity connection");
                     CurrentCharge += 100d;
                 }
                 OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Capacity, CurrentCharge));
