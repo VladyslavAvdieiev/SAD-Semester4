@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulation.Hardware
+namespace Simulation.Exceptions
 {
     public class BatteryRunOutException : Exception {
         public BatteryRunOutException() : base() { } 

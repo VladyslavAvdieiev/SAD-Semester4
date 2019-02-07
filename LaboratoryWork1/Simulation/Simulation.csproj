@@ -44,7 +44,7 @@
     <Compile Include="Exceptions\NoNetworkConnectionException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
-    <Compile Include="Hardware\Battery\Exceptions\BatteryRunOutException.cs" />
+    <Compile Include="Exceptions\BatteryRunOutException.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />
     <Compile Include="Hardware\CPU\CPU.cs" />
     <Compile Include="Hardware\CPU\ICPU.cs" />
@@ -54,8 +54,8 @@
     <Compile Include="Hardware\Devices\IExternalDevice.cs" />
     <Compile Include="Hardware\Devices\Laptop.cs" />
     <Compile Include="Hardware\Devices\PersonalComputer.cs" />
-    <Compile Include="Hardware\Memory\Exceptions\DriveIsEmptyException.cs" />
-    <Compile Include="Hardware\Memory\Exceptions\NotEnoughMemoryException.cs" />
+    <Compile Include="Exceptions\DriveIsEmptyException.cs" />
+    <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
     <Compile Include="Hardware\Memory\IInternalMemory.cs" />
