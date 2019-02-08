@@ -10,7 +10,6 @@ namespace Simulation.Hardware
     public interface IDevice {
         string Title { get; }
         bool InProgress { get; }
-        IOS OS { get; }
         ICPU CPU { get; }
         IBattery Battery { get; }
         IInternalMemory RAM { get; }

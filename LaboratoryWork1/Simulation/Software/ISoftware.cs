@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Simulation.Software
 {
-    public interface IProgram {
+    public interface ISoftware {
         string Title { get; }
         bool InProgress { get; }
-        bool NeedsNetwork { get; }
         double PowerUsage { get; }
         double MemoryUsage { get; }
-        double Storage { get; }
-        bool Start();
-        bool Stop();
+        double NeededStorage { get; }
+        Task Run();
+        Task Stop();
     }
 }

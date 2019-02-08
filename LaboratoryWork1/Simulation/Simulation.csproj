@@ -65,11 +65,12 @@
     <Compile Include="Hardware\Memory\RAM.cs" />
     <Compile Include="Hardware\Memory\SSD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Software\OS\OS.cs" />
-    <Compile Include="Software\OS\IOS.cs" />
-    <Compile Include="Software\Program\IProgram.cs" />
-    <Compile Include="Software\Program\Program.cs" />
-    <Compile Include="Software\Program\ProgramEventArgs.cs" />
+    <Compile Include="Software\IOperatingSystem.cs" />
+    <Compile Include="Software\ISoftware.cs" />
+    <Compile Include="Software\IProgram.cs" />
+    <Compile Include="Software\OperatingSystem.cs" />
+    <Compile Include="Software\Program.cs" />
+    <Compile Include="Software\ProgramEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

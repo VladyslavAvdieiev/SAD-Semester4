@@ -17,7 +17,6 @@ namespace Simulation.Hardware
 
         public string Title { get; }
         public bool InProgress { get; private set; }
-        public IOS OS { get; }
         public ICPU CPU { get; }
         public IBattery Battery { get; }
         public IInternalMemory RAM { get; }
@@ -27,11 +26,10 @@ namespace Simulation.Hardware
         public bool HasElectricityConnection { get; set; }
         public bool HasNetworkConnection { get; set; }
 
-        public Laptop(string title, IOS os, ICPU cpu, IBattery battery, IInternalMemory ram, 
+        public Laptop(string title, ICPU cpu, IBattery battery, IInternalMemory ram, 
             IExternalStorage externalStorage, bool hasElectricityConnection, bool hasNetworkConnection)
         {
             Title = title;
-            OS = os;
             CPU = cpu;
             Battery = battery;
             RAM = ram;

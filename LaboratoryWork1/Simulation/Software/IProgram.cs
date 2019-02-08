@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulation.Software
 {
-    public interface IOS {
-        string Title { get; }
-        double MemoryUsage { get; }
+    public interface IProgram : ISoftware {
+        bool NeedsNetworkConnection { get; }
     }
 }
