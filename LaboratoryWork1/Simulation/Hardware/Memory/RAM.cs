@@ -33,7 +33,7 @@ namespace Simulation.Hardware
 
         public async Task Load(double space) {
             await Task.Run(() => {
-                Thread.Sleep(100);
+                Thread.Sleep(100 * (int)space);
                 UsedSpace += space;
                 OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been loaded", Capacity, UsedSpace));
             });
@@ -41,7 +41,7 @@ namespace Simulation.Hardware
 
         public async Task Unload(double space) {
             await Task.Run(() => {
-                Thread.Sleep(100);
+                Thread.Sleep(100 * (int)space);
                 UsedSpace -= space;
                 OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been unloaded", Capacity, UsedSpace));
             });
@@ -49,7 +49,7 @@ namespace Simulation.Hardware
 
         public async Task Dispose() {
             await Task.Run(() => {
-                Thread.Sleep(1000);
+                Thread.Sleep(100 * (int)UsedSpace);
                 UsedSpace = 0d;
                 OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been disposed", Capacity, UsedSpace));
             });

@@ -28,6 +28,7 @@ namespace Simulation.Software
             MemoryUsage = memoryUsage;
             NeededStorage = neededStorage;
             _owner = owner;
+            _programs = new List<IProgram>();
         }
 
         public async Task Run() {
@@ -38,26 +39,58 @@ namespace Simulation.Software
                 if (!_owner.InProgress)
                     throw new Exception();
                 InProgress = true;
+                UseRAM();
                 OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has started working"));
             });
         }
 
         public async Task Stop() {
-            await Task.Run(() => {
-                Thread.Sleep(100);
-                if (!InProgress)
-                    throw new Exception();
-                InProgress = false;
-                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has stopped working"));
-            });
+            if (!InProgress)
+                throw new Exception();
+            InProgress = false;
+            await StopPrograms();
+            await _owner.RAM.Dispose();
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has stopped working"));
         }
 
         public async Task Install(IProgram program) {
-            throw new NotImplementedException();
+            await _owner.ExternalStorage.Load(program.NeededStorage);
+            _programs.Add(program);
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed"));
         }
 
         public async Task Uninstall(IProgram program) {
-            throw new NotImplementedException();
+            if (!_programs.Contains(program))
+                throw new Exception();
+            await _owner.ExternalStorage.Unload(program.NeededStorage);
+            _programs.Remove(program);
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed"));
+        }
+
+        private async Task UseRAM() {
+            await Task.Run(() => {
+                double total;
+                while (InProgress) {
+                    Thread.Sleep(1000);
+                    total = 0d;
+                    total += _owner.CPU.MemoryUsage;
+                    total += _owner.OperatingSystem.MemoryUsage;
+                    foreach (IProgram program in _programs)
+                        if (program.InProgress)
+                            total += program.MemoryUsage;
+                    if (total != _owner.RAM.UsedSpace)
+                        if (total > _owner.RAM.UsedSpace)
+                            _owner.RAM.Load(total - _owner.RAM.UsedSpace);
+                        else
+                            _owner.RAM.Unload(_owner.RAM.UsedSpace - total);
+                }
+            });
+        }
+
+        private async Task StopPrograms() {
+            foreach (IProgram program in _programs)
+                if (program.InProgress)
+                    await program.Stop();
         }
     }
 }

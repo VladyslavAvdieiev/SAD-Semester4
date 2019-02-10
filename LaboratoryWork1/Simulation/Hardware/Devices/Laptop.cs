@@ -9,11 +9,7 @@ using System.Threading;
 namespace Simulation.Hardware
 {
     public class Laptop : IDevice {
-        private List<IProgram> _programs;
         private List<IExternalDevice> _externalDevices;
-
-        public event EventHandler<DeviceEventArgs> OnStatusChanged;
-        public event EventHandler<DeviceEventArgs> OnErrorOccurred;
 
         public string Title { get; }
         public bool InProgress { get; private set; }
@@ -21,150 +17,80 @@ namespace Simulation.Hardware
         public IBattery Battery { get; }
         public IInternalMemory RAM { get; }
         public IExternalStorage ExternalStorage { get; }
-        public IList<IProgram> Programs { get => _programs.AsReadOnly(); }
+        public IOperatingSystem OperatingSystem { get; }
         public IList<IExternalDevice> ExternalDevices { get => _externalDevices.AsReadOnly(); }
         public bool HasElectricityConnection { get; set; }
         public bool HasNetworkConnection { get; set; }
 
-        public Laptop(string title, ICPU cpu, IBattery battery, IInternalMemory ram, 
-            IExternalStorage externalStorage, bool hasElectricityConnection, bool hasNetworkConnection)
+        public event EventHandler<DeviceEventArgs> OnStatusChanged;
+
+        public Laptop(string title, ICPU cpu, IInternalMemory ram, IExternalStorage externalStorage,
+            IOperatingSystem operatingSystem, bool hasElectricityConnection, bool hasNetworkConnection)
         {
             Title = title;
             CPU = cpu;
-            Battery = battery;
             RAM = ram;
             ExternalStorage = externalStorage;
-            _programs = new List<IProgram>();
-            _externalDevices = new List<IExternalDevice>();
+            OperatingSystem = operatingSystem;
             HasElectricityConnection = hasElectricityConnection;
             HasNetworkConnection = hasNetworkConnection;
+            _externalDevices = new List<IExternalDevice>();
         }
 
-        public bool TurnOn() {
-            throw new NotImplementedException();
-            //if (InProgress) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device is already in progress"));
-            //    return false;
-            //}
-            //if (!HasElectricityConnection && Battery == null) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The electricity connection troubles have just appeared"));
-            //    return false;
-            //}
-            //try {
-            //    InProgress = true;
-            //    RAM.UsedSpace = CountRAMUsage();
-            //}
-            //catch (ArgumentOutOfRangeException) {
-            //    InProgress = false;
-            //    return false;
-            //}
-            //if (!HasElectricityConnection)
-            //    Task.Run(() => UseBattery());
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working"));
-            //return true;
+        public async Task TurnOn() {
+            if (InProgress)
+                throw new Exception();
+            if (!HasElectricityConnection && Battery == null)
+                throw new Exception();
+            InProgress = true;
+            UseBattery();
+            await OperatingSystem.Run();
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working"));
         }
 
-        public bool TurnOff() {
-            throw new NotImplementedException();
-            //if (!InProgress) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("The device is not in progress"));
-            //    return false;
-            //}
-            //InProgress = false;
-            //TurnOffPrograms();
-            //RAM.Format();
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just stopped working"));
-            //return true;
+        public async Task TurnOff() {
+            if (!InProgress)
+                throw new Exception();
+            InProgress = false;
+            await OperatingSystem.Stop();
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has stopped working"));
         }
 
-        private double CountRAMUsage() {
-            throw new NotImplementedException();
-            //double total = 0d;
-            //total += OS.MemoryUsage;
-            //total += CPU.MemoryUsage;
-            //foreach (IProgram program in _programs)
-            //    if (program.InProgress)
-            //        total += program.MemoryUsage;
-            //return total;
+        public async Task Connect(IExternalDevice externalDevice) {
+            await Task.Run(() => {
+                Thread.Sleep(100);
+                _externalDevices.Add(externalDevice);
+                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected"));
+            });
         }
 
-        private void TurnOffPrograms() {
-            throw new NotImplementedException();
-            //foreach (IProgram program in _programs)
-            //    if (program.InProgress)
-            //        program.Stop();
+        public async Task Disconnect(IExternalDevice externalDevice) {
+            await Task.Run(() => {
+                Thread.Sleep(100);
+                if (!_externalDevices.Contains(externalDevice))
+                    throw new Exception();
+                _externalDevices.Remove(externalDevice);
+                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected"));
+            });
         }
 
-        private void UseBattery() {
-            throw new NotImplementedException();
-            //double total = 0d;
-            //while (InProgress) {
-            //    Thread.Sleep(1000);
-            //    total = 0d;
-            //    total += CPU.PowerUsage;
-            //    foreach (IProgram program in _programs)
-            //        if (program.InProgress)
-            //            total += program.PowerUsage;
-            //    foreach (IExternalDevice device in _externalDevices)
-            //        total += device.PowerUsage;
-            //    try {
-            //        Battery.FreeCharge -= total;
-            //    }
-            //    catch (ArgumentOutOfRangeException) {
-            //        TurnOff();
-            //    }
-            //}
-        }
-
-        public bool Install(IProgram program) {
-            throw new NotImplementedException();
-            //if (_programs.Contains(program)) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such program is already installed"));
-            //    return false;
-            //}
-            //try {
-            //    ExternalStorage.UsedSpace += program.Storage;
-            //}
-            //catch (ArgumentOutOfRangeException) {
-            //    return false;
-            //}
-            //_programs.Add(program);
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The program has been successfully installed"));
-            //return true;
-        }
-
-        public bool Uninstall(IProgram program) {
-            throw new NotImplementedException();
-            //if (!_programs.Contains(program)) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such program does not exist"));
-            //    return false;
-            //}
-            //ExternalStorage.UsedSpace -= program.Storage;
-            //_programs.Remove(program);
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The program has been successfully uninstalled"));
-            //return true;
-        }
-
-        public bool Connect(IExternalDevice externalDevice) {
-            throw new NotImplementedException();
-            //if (_externalDevices.Contains(externalDevice)) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such device is already connected"));
-            //    return false;
-            //}
-            //_externalDevices.Add(externalDevice);
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected"));
-            //return true;
-        }
-
-        public bool Disconnect(IExternalDevice externalDevice) {
-            throw new NotImplementedException();
-            //if (!_externalDevices.Contains(externalDevice)) {
-            //    OnErrorOccurred?.Invoke(this, new DeviceEventArgs("Such device does not exist"));
-            //    return false;
-            //}
-            //_externalDevices.Remove(externalDevice);
-            //OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected"));
-            //return true;
+        private async Task UseBattery() {
+            await Task.Run(() => {
+                double total;
+                while (InProgress) {
+                    Thread.Sleep(1000);
+                    total = 0d;
+                    if (OperatingSystem.InProgress)
+                        total += OperatingSystem.PowerUsage;
+                    total += CPU.PowerUsage;
+                    foreach (IProgram program in OperatingSystem.Programs)
+                        if (program.InProgress)
+                            total += program.PowerUsage;
+                    foreach (IExternalDevice externalDevice in _externalDevices)
+                        total += externalDevice.PowerUsage;
+                    Battery.Use(total);
+                }
+            });
         }
     }
 }
