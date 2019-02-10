@@ -41,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\HardwareCannotBeStartedException.cs" />
+    <Compile Include="Exceptions\HardwareCannotBeStoppedException.cs" />
     <Compile Include="Exceptions\NoElectricityConnectionException.cs" />
     <Compile Include="Exceptions\NoNetworkConnectionException.cs" />
+    <Compile Include="Exceptions\SoftwareCannotBeStartedException.cs" />
+    <Compile Include="Exceptions\SoftwareCannotBeStoppedException.cs" />
+    <Compile Include="Exceptions\UnknownDeviceException.cs" />
+    <Compile Include="Exceptions\UnknownProgramException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
     <Compile Include="Exceptions\BatteryRunOutException.cs" />

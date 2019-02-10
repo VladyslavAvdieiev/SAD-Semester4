@@ -1,4 +1,5 @@
 ﻿using System;
+using Simulation.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,11 +33,11 @@ namespace Simulation.Software
             await Task.Run(() =>{
                 Thread.Sleep(100);
                 if (InProgress)
-                    throw new Exception();
+                    throw new SoftwareCannotBeStartedException();
                 if (!_owner.InProgress)
-                    throw new Exception();
+                    throw new SoftwareCannotBeStartedException();
                 if (NeedsNetworkConnection && !_owner.HasNetworkConnection)
-                    throw new Exception();
+                    throw new NoNetworkConnectionException();
                 InProgress = true;
                 OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has started working"));
             });
@@ -46,7 +47,7 @@ namespace Simulation.Software
             await Task.Run(() => {
                 Thread.Sleep(100);
                 if (!InProgress)
-                    throw new Exception();
+                    throw new SoftwareCannotBeStoppedException();
                 InProgress = false;
                 OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working"));
             });

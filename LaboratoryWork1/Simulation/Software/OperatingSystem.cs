@@ -1,5 +1,6 @@
 ﻿using System;
 using Simulation.Hardware;
+using Simulation.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace Simulation.Software
             await Task.Run(() => {
                 Thread.Sleep(100);
                 if (InProgress)
-                    throw new Exception();
+                    throw new SoftwareCannotBeStartedException();
                 if (!_owner.InProgress)
                     throw new Exception();
                 InProgress = true;
@@ -46,7 +47,7 @@ namespace Simulation.Software
 
         public async Task Stop() {
             if (!InProgress)
-                throw new Exception();
+                throw new SoftwareCannotBeStoppedException();
             InProgress = false;
             await StopPrograms();
             await _owner.RAM.Dispose();
@@ -61,7 +62,7 @@ namespace Simulation.Software
 
         public async Task Uninstall(IProgram program) {
             if (!_programs.Contains(program))
-                throw new Exception();
+                throw new UnknownProgramException();
             await _owner.ExternalStorage.Unload(program.NeededStorage);
             _programs.Remove(program);
             OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed"));

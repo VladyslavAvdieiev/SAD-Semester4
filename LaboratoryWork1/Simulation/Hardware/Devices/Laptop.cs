@@ -1,5 +1,6 @@
 ﻿using System;
 using Simulation.Software;
+using Simulation.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,9 +40,9 @@ namespace Simulation.Hardware
 
         public async Task TurnOn() {
             if (InProgress)
-                throw new Exception();
+                throw new HardwareCannotBeStartedException();
             if (!HasElectricityConnection && Battery == null)
-                throw new Exception();
+                throw new NoElectricityConnectionException();
             InProgress = true;
             UseBattery();
             await OperatingSystem.Run();
@@ -50,7 +51,7 @@ namespace Simulation.Hardware
 
         public async Task TurnOff() {
             if (!InProgress)
-                throw new Exception();
+                throw new HardwareCannotBeStoppedException();
             InProgress = false;
             await OperatingSystem.Stop();
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has stopped working"));
@@ -68,7 +69,7 @@ namespace Simulation.Hardware
             await Task.Run(() => {
                 Thread.Sleep(100);
                 if (!_externalDevices.Contains(externalDevice))
-                    throw new Exception();
+                    throw new UnknownDeviceException();
                 _externalDevices.Remove(externalDevice);
                 OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected"));
             });
