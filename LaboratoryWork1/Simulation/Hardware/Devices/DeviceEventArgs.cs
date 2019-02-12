@@ -8,8 +8,14 @@ namespace Simulation.Hardware
 {
     public class DeviceEventArgs : EventArgs {
         public string Message { get; }
-        public DeviceEventArgs(string message) {
+        public bool InProgress { get; }
+        public bool HasElectricityConnection { get; }
+        public bool HasNetworkConnection { get; }
+        public DeviceEventArgs(string message, bool inProgress, bool hasElectricityConnection, bool hasNetworkConnection) {
             Message = message;
+            InProgress = inProgress;
+            HasElectricityConnection = hasElectricityConnection;
+            HasNetworkConnection = hasNetworkConnection;
         }
     }
 }

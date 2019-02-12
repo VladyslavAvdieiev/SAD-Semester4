@@ -36,7 +36,7 @@ namespace Simulation.Hardware
 
         public void Use(double charge) {
             CurrentCharge -= charge;
-            OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed", Capacity, CurrentCharge));
+            OnChargeChanged?.Invoke(this, new BatteryEventArgs("Charge has been changed", Title, Capacity, CurrentCharge));
         }
 
         public async Task Charge() {
@@ -47,7 +47,7 @@ namespace Simulation.Hardware
                         throw new NoElectricityConnectionException("There is no electricity connection");
                     CurrentCharge += 100d;
                 }
-                OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Capacity, CurrentCharge));
+                OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Title, Capacity, CurrentCharge));
             });
         }
     }

@@ -46,7 +46,7 @@ namespace Simulation.Hardware
             InProgress = true;
             UseBattery();
             await OperatingSystem.Run();
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working"));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working", InProgress, HasElectricityConnection, HasNetworkConnection));
         }
 
         public async Task TurnOff() {
@@ -54,14 +54,14 @@ namespace Simulation.Hardware
                 throw new HardwareCannotBeStoppedException();
             InProgress = false;
             await OperatingSystem.Stop();
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has stopped working"));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has stopped working", InProgress, HasElectricityConnection, HasNetworkConnection));
         }
 
         public async Task Connect(IExternalDevice externalDevice) {
             await Task.Run(() => {
                 Thread.Sleep(100);
                 _externalDevices.Add(externalDevice);
-                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected"));
+                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected", InProgress, HasElectricityConnection, HasNetworkConnection));
             });
         }
 
@@ -71,7 +71,7 @@ namespace Simulation.Hardware
                 if (!_externalDevices.Contains(externalDevice))
                     throw new UnknownDeviceException();
                 _externalDevices.Remove(externalDevice);
-                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected"));
+                OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected", InProgress, HasElectricityConnection, HasNetworkConnection));
             });
         }
 

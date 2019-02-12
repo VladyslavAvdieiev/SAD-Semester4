@@ -35,7 +35,7 @@ namespace Simulation.Hardware
             await Task.Run(() => {
                 Thread.Sleep(100 * (int)space);
                 UsedSpace += space;
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been loaded", Capacity, UsedSpace));
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been loaded", Title, Capacity, UsedSpace));
             });
         }
 
@@ -43,7 +43,7 @@ namespace Simulation.Hardware
             await Task.Run(() => {
                 Thread.Sleep(100 * (int)space);
                 UsedSpace -= space;
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been unloaded", Capacity, UsedSpace));
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been unloaded", Title, Capacity, UsedSpace));
             });
         }
 
@@ -51,7 +51,7 @@ namespace Simulation.Hardware
             await Task.Run(() => {
                 Thread.Sleep(100 * (int)UsedSpace);
                 UsedSpace = 0d;
-                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been formatted", Capacity, UsedSpace));
+                OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been formatted", Title, Capacity, UsedSpace));
             });
         }
     }

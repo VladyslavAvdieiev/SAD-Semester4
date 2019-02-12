@@ -77,6 +77,5 @@
     <Compile Include="Software\Program.cs" />
     <Compile Include="Software\ProgramEventArgs.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,10 +38,10 @@ namespace Simulation.Software
                 if (InProgress)
                     throw new SoftwareCannotBeStartedException();
                 if (!_owner.InProgress)
-                    throw new Exception();
+                    throw new SoftwareCannotBeStartedException();
                 InProgress = true;
                 UseRAM();
-                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has started working"));
+                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has started working", Title, InProgress));
             });
         }
 
@@ -51,13 +51,13 @@ namespace Simulation.Software
             InProgress = false;
             await StopPrograms();
             await _owner.RAM.Dispose();
-            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has stopped working"));
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has stopped working", Title, InProgress));
         }
 
         public async Task Install(IProgram program) {
             await _owner.ExternalStorage.Load(program.NeededStorage);
             _programs.Add(program);
-            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed"));
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed", Title, InProgress));
         }
 
         public async Task Uninstall(IProgram program) {
@@ -65,7 +65,7 @@ namespace Simulation.Software
                 throw new UnknownProgramException();
             await _owner.ExternalStorage.Unload(program.NeededStorage);
             _programs.Remove(program);
-            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed"));
+            OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has been successfully installed", Title, InProgress));
         }
 
         private async Task UseRAM() {

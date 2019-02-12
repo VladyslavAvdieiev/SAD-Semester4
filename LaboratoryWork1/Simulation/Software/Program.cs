@@ -39,7 +39,7 @@ namespace Simulation.Software
                 if (NeedsNetworkConnection && !_owner.HasNetworkConnection)
                     throw new NoNetworkConnectionException();
                 InProgress = true;
-                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has started working"));
+                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has started working", Title, InProgress));
             });
         }
 
@@ -49,7 +49,7 @@ namespace Simulation.Software
                 if (!InProgress)
                     throw new SoftwareCannotBeStoppedException();
                 InProgress = false;
-                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working"));
+                OnStatusChanged?.Invoke(this, new ProgramEventArgs("The program has stopped working", Title, InProgress));
             });
         }
     }

@@ -8,8 +8,12 @@ namespace Simulation.Software
 {
     public class ProgramEventArgs : EventArgs {
         public string Message { get; }
-        public ProgramEventArgs(string message) {
+        public string Title { get; }
+        public bool InProgress { get; }
+        public ProgramEventArgs(string message, string title, bool inProgress) {
             Message = message;
+            Title = title;
+            InProgress = inProgress;
         }
     }
 }
