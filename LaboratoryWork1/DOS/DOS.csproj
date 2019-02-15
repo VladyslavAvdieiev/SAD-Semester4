@@ -47,6 +47,8 @@
     <Compile Include="Exceptions\HardwareCannotBeEnabledException.cs" />
     <Compile Include="Exceptions\NoElectricityConnectionException.cs" />
     <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
+    <Compile Include="Exceptions\SoftwareCannotBeDisabledException.cs" />
+    <Compile Include="Exceptions\SoftwareCannotBeEnabledException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />
@@ -62,10 +64,14 @@
     <Compile Include="Hardware\Memory\RAM.cs" />
     <Compile Include="Hardware\Memory\SSD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Software\Program\IProgram.cs" />
+    <Compile Include="Software\ISoftware.cs" />
+    <Compile Include="Software\Program\Program.cs" />
+    <Compile Include="Software\SoftwareEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hardware\Devices\External devices\" />
-    <Folder Include="Software\" />
+    <Folder Include="Software\Operating system\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
