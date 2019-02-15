@@ -8,7 +8,7 @@ namespace DOS
 {
     public interface IDevice {
         string Title { get; }
-        bool InProgress { get; }
+        bool IsEnabled { get; }
         bool HasElectricityConnection { get; set; }
         bool HasNetworkConnection { get; set; }
     }

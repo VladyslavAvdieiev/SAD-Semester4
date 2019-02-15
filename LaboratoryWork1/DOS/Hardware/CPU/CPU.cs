@@ -10,7 +10,7 @@ namespace DOS
         private IDevice _owner;
 
         public string Title { get; }
-        public bool IsEnable { get; private set; }
+        public bool IsEnabled { get; private set; }
         public int Cores { get; }
         public double Frequency { get; }
         public double PowerUsage { get; }
@@ -28,19 +28,19 @@ namespace DOS
         }
 
         public void Enable() {
-            if (!_owner.InProgress)
+            if (!_owner.IsEnabled)
                 throw new HardwareCannotBeEnabledException("The owner device is not in progress");
-            if (IsEnable)
+            if (IsEnabled)
                 throw new HardwareCannotBeEnabledException("The CPU is already enabled");
-            IsEnable = true;
-            OnStatusChanged?.Invoke(this, new CPUEventArgs("The CPU has been enabled", Title, IsEnable));
+            IsEnabled = true;
+            OnStatusChanged?.Invoke(this, new CPUEventArgs("The CPU has been enabled", Title, IsEnabled));
         }
 
         public void Disable() {
-            if (!IsEnable)
+            if (!IsEnabled)
                 throw new HardwareCannotBeDisabledException("The CPU is already disabled");
-            IsEnable = false;
-            OnStatusChanged?.Invoke(this, new CPUEventArgs("The CPU has been disabled", Title, IsEnable));
+            IsEnabled = false;
+            OnStatusChanged?.Invoke(this, new CPUEventArgs("The CPU has been disabled", Title, IsEnabled));
         }
     }
 }

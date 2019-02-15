@@ -9,11 +9,11 @@ namespace DOS
     public class CPUEventArgs : EventArgs {
         public string Message { get; }
         public string Title { get; }
-        public bool IsEnable { get; }
-        public CPUEventArgs(string message, string title, bool isEnable) {
+        public bool IsEnabled { get; }
+        public CPUEventArgs(string message, string title, bool isEnabled) {
             Message = message;
             Title = title;
-            IsEnable = isEnable;
+            IsEnabled = isEnabled;
         }
     }
 }
