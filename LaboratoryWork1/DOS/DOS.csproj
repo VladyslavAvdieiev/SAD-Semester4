@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\BatteryRunOutException.cs" />
+    <Compile Include="Exceptions\DriveIsEmptyException.cs" />
     <Compile Include="Exceptions\HardwareCannotBeDisabledException.cs" />
     <Compile Include="Exceptions\HardwareCannotBeEnabledException.cs" />
     <Compile Include="Exceptions\NoElectricityConnectionException.cs" />
+    <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />
@@ -52,6 +54,13 @@
     <Compile Include="Hardware\CPU\CPUEventArgs.cs" />
     <Compile Include="Hardware\CPU\ICPU.cs" />
     <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
+    <Compile Include="Hardware\Memory\HDD.cs" />
+    <Compile Include="Hardware\Memory\IExternalStorage.cs" />
+    <Compile Include="Hardware\Memory\IInternalMemory.cs" />
+    <Compile Include="Hardware\Memory\IMemory.cs" />
+    <Compile Include="Hardware\Memory\MemoryEventArgs.cs" />
+    <Compile Include="Hardware\Memory\RAM.cs" />
+    <Compile Include="Hardware\Memory\SSD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
