@@ -18,13 +18,12 @@ namespace DOS
 
         public event EventHandler<CPUEventArgs> OnStatusChanged;
 
-        public CPU(string title, int cores, double frequency, double memoryUsage, IDevice owner) {
+        public CPU(string title, int cores, double frequency, double memoryUsage) {
             Title = title;
             Cores = cores;
             Frequency = frequency;
             MemoryUsage = memoryUsage;
             PowerUsage = Frequency * Cores / 10;
-            _owner = owner;
         }
 
         public void Enable() {
@@ -41,6 +40,10 @@ namespace DOS
                 throw new HardwareCannotBeDisabledException("The CPU is already disabled");
             IsEnabled = false;
             OnStatusChanged?.Invoke(this, new CPUEventArgs("The CPU has been disabled", Title, IsEnabled));
+        }
+
+        public void AddOwner(IDevice owner) {
+            _owner = owner;
         }
     }
 }

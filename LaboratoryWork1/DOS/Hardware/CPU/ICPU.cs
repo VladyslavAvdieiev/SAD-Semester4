@@ -15,5 +15,6 @@ namespace DOS
         double MemoryUsage { get; }
         void Enable();
         void Disable();
+        void AddOwner(IDevice owner);
     }
 }

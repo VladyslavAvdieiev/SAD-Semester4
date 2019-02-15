@@ -21,12 +21,11 @@ namespace DOS
 
         public event EventHandler<SoftwareEventArgs> OnStatusChanged;
 
-        public OperatingSystem(string title, double powerUsage, double memoryUsage, double neededStorage, IDevice owner) {
+        public OperatingSystem(string title, double powerUsage, double memoryUsage, double neededStorage) {
             Title = title;
             PowerUsage = powerUsage;
             MemoryUsage = memoryUsage;
             NeededStorage = neededStorage;
-            _owner = owner;
             _programs = new List<IProgram>();
         }
 
@@ -87,6 +86,10 @@ namespace DOS
             _owner.ExternalStorage.Unload(program.NeededStorage);           // DEBUG DriveIsEmptyException
             _programs.Remove(program);
             OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The program has been successfully uninstalled", Title, IsEnabled));
+        }
+
+        public void AddOwner(IDevice owner) {
+            _owner = owner;
         }
     }
 }

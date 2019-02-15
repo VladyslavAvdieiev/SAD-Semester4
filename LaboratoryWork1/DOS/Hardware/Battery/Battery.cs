@@ -25,11 +25,10 @@ namespace DOS
 
         public event EventHandler<BatteryEventArgs> OnChargeChanged;
 
-        public Battery(string title, double capacity, IDevice owner) {
+        public Battery(string title, double capacity) {
             Title = title;
             Capacity = capacity;
             CurrentCharge = Capacity;
-            _owner = owner;
         }
 
         public void Use(double charge) {
@@ -42,6 +41,10 @@ namespace DOS
                 throw new NoElectricityConnectionException("There is no electricity connection");
             CurrentCharge = Capacity;
             OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Title, Capacity, CurrentCharge));
+        }
+
+        public void AddOwner(IDevice owner) {
+            _owner = owner;
         }
     }
 }

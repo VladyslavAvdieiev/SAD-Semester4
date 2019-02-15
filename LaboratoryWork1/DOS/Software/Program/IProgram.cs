@@ -8,5 +8,6 @@ namespace DOS
 {
     public interface IProgram : ISoftware {
         bool NeedsNetworkConnection { get; }
+        void AddOwner(IOperatingSystem owner);
     }
 }

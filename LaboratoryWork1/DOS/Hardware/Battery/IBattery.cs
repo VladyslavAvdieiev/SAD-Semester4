@@ -12,5 +12,6 @@ namespace DOS
         double CurrentCharge { get; }
         void Use(double charge);
         void Charge();
+        void AddOwner(IDevice owner);
     }
 }

@@ -11,5 +11,6 @@ namespace DOS
         bool HasNetworkConnection { get; }
         void Install(IProgram program);
         void Uninstall(IProgram program);
+        void AddOwner(IDevice owner);
     }
 }

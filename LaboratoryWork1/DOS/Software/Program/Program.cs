@@ -18,13 +18,12 @@ namespace DOS
 
         public event EventHandler<SoftwareEventArgs> OnStatusChanged;
 
-        public Program(string title, bool needsNetworkConnection, double powerUsage, double memoryUsage, double neededStorage, IOperatingSystem owner) {
+        public Program(string title, bool needsNetworkConnection, double powerUsage, double memoryUsage, double neededStorage) {
             Title = title;
             NeedsNetworkConnection = needsNetworkConnection;
             PowerUsage = powerUsage;
             MemoryUsage = memoryUsage;
             NeededStorage = neededStorage;
-            _owner = owner;
         }
 
         public void Run() {
@@ -43,6 +42,10 @@ namespace DOS
                 throw new SoftwareCannotBeDisabledException("The program is already disabled");
             IsEnabled = false;
             OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The program has been disabled", Title, IsEnabled));
+        }
+
+        public void AddOwner(IOperatingSystem owner) {
+            _owner = owner;
         }
     }
 }
