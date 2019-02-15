@@ -64,6 +64,8 @@ namespace DOS
                 throw new SoftwareCannotBeDisabledException("The OS is already disabled");
             IsEnabled = false;
             StopPrograms();
+            _owner.CPU.Disable();
+            _owner.RAM.Dispose();
             OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The OS has been disabled", Title, IsEnabled));
         }
 

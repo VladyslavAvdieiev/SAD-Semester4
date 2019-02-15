@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeDisabledException.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeEnabledException.cs" />
+    <Compile Include="Exceptions\UnknownHardwareException.cs" />
     <Compile Include="Exceptions\UnknownSoftwareException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
@@ -59,7 +60,11 @@
     <Compile Include="Hardware\CPU\ICPU.cs" />
     <Compile Include="Hardware\Devices\External devices\ExternalDevice.cs" />
     <Compile Include="Hardware\Devices\External devices\IExternalDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\DeviceEventArgs.cs" />
     <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IPortableDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IStationaryDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\Laptop.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
     <Compile Include="Hardware\Memory\IInternalMemory.cs" />

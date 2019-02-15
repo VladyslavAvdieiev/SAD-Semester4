@@ -10,7 +10,6 @@ namespace DOS
         string Title { get; }
         bool IsEnabled { get; }
         ICPU CPU { get; }
-        IBattery Battery { get; }
         IInternalMemory RAM { get; }
         IExternalStorage ExternalStorage { get; }
         IOperatingSystem OperatingSystem { get; }
