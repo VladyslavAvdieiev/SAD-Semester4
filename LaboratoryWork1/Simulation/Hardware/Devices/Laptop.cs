@@ -40,11 +40,12 @@ namespace Simulation.Hardware
 
         public async Task TurnOn() {
             if (InProgress)
-                throw new HardwareCannotBeStartedException();
+                throw new HardwareCannotBeStartedException("The device is already in progress");
             if (!HasElectricityConnection && Battery == null)
-                throw new NoElectricityConnectionException();
+                throw new NoElectricityConnectionException("The device cnnot be started There is no electricity connection");
             InProgress = true;
-            UseBattery();
+            if (!HasElectricityConnection)
+                UseBattery();
             await OperatingSystem.Run();
             OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has just started working", InProgress, HasElectricityConnection, HasNetworkConnection));
         }

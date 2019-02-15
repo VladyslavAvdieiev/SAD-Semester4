@@ -36,9 +36,9 @@ namespace Simulation.Software
             await Task.Run(() => {
                 Thread.Sleep(100);
                 if (InProgress)
-                    throw new SoftwareCannotBeStartedException();
+                    throw new SoftwareCannotBeStartedException("The software is already in progress");
                 if (!_owner.InProgress)
-                    throw new SoftwareCannotBeStartedException();
+                    throw new SoftwareCannotBeStartedException("The owner device is not in progress");
                 InProgress = true;
                 UseRAM();
                 OnStatusChanged?.Invoke(this, new ProgramEventArgs("The operating system has started working", Title, InProgress));
@@ -79,11 +79,16 @@ namespace Simulation.Software
                     foreach (IProgram program in _programs)
                         if (program.InProgress)
                             total += program.MemoryUsage;
-                    if (total != _owner.RAM.UsedSpace)
-                        if (total > _owner.RAM.UsedSpace)
-                            _owner.RAM.Load(total - _owner.RAM.UsedSpace);
-                        else
-                            _owner.RAM.Unload(_owner.RAM.UsedSpace - total);
+                    try {
+                        if (total != _owner.RAM.UsedSpace)
+                            if (total > _owner.RAM.UsedSpace)
+                                _owner.RAM.Load(total - _owner.RAM.UsedSpace);
+                            else
+                                _owner.RAM.Unload(_owner.RAM.UsedSpace - total);
+                    }
+                    catch (NotEnoughMemoryException e) {
+
+                    }
                 }
             });
         }
