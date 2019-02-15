@@ -56,6 +56,8 @@
     <Compile Include="Hardware\CPU\CPU.cs" />
     <Compile Include="Hardware\CPU\CPUEventArgs.cs" />
     <Compile Include="Hardware\CPU\ICPU.cs" />
+    <Compile Include="Hardware\Devices\External devices\ExternalDevice.cs" />
+    <Compile Include="Hardware\Devices\External devices\IExternalDevice.cs" />
     <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
     <Compile Include="Hardware\Memory\HDD.cs" />
     <Compile Include="Hardware\Memory\IExternalStorage.cs" />
@@ -72,8 +74,6 @@
     <Compile Include="Software\Program\Program.cs" />
     <Compile Include="Software\SoftwareEventArgs.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Hardware\Devices\External devices\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
