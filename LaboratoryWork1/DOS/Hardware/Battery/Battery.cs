@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DOS
 {
     public class Battery : IBattery {
+        private IDevice _owner;
         private double _currentCharge;
 
         public string Title { get; }
@@ -24,10 +25,11 @@ namespace DOS
 
         public event EventHandler<BatteryEventArgs> OnChargeChanged;
 
-        public Battery(string title, double capacity) {
+        public Battery(string title, double capacity, IDevice owner) {
             Title = title;
             Capacity = capacity;
             CurrentCharge = Capacity;
+            _owner = owner;
         }
 
         public void Use(double charge) {
@@ -36,6 +38,8 @@ namespace DOS
         }
 
         public void Charge() {
+            if (!_owner.HasElectricityConnection)
+                throw new NoElectricityConnectionException("There is no electricity connection");
             CurrentCharge = Capacity;
             OnChargeChanged?.Invoke(this, new BatteryEventArgs("The battery has been charged", Title, Capacity, CurrentCharge));
         }

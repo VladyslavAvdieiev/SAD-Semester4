@@ -42,12 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\BatteryRunOutException.cs" />
+    <Compile Include="Exceptions\NoElectricityConnectionException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Hardware\Devices\External devices\" />
     <Folder Include="Software\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
