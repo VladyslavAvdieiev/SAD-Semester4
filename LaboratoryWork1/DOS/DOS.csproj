@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeDisabledException.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeEnabledException.cs" />
+    <Compile Include="Exceptions\UnknownSoftwareException.cs" />
     <Compile Include="Hardware\Battery\Battery.cs" />
     <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
     <Compile Include="Hardware\Battery\IBattery.cs" />

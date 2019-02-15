@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DOS
@@ -35,12 +36,27 @@ namespace DOS
             if (IsEnabled)
                 throw new SoftwareCannotBeEnabledException("The OS is already enabled");
             IsEnabled = true;
+            _owner.CPU.Enable();
             Task.Run(() => StartUsingRAM());
             OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The OS has been enabled", Title, IsEnabled));
         }
 
         private void StartUsingRAM() {
-            throw new NotImplementedException();
+            double total;
+            while (IsEnabled) {
+                Thread.Sleep(1000);
+                total = 0d;
+                total += _owner.CPU.MemoryUsage;
+                total += _owner.OperatingSystem.MemoryUsage;
+                foreach (IProgram program in _programs)
+                    if (program.IsEnabled)
+                        total += program.MemoryUsage;
+                if (total != _owner.RAM.UsedSpace)
+                    if (total > _owner.RAM.UsedSpace)
+                        _owner.RAM.Load(total - _owner.RAM.UsedSpace);      // DEBUG NotEnoughMemoryException
+                    else
+                        _owner.RAM.Unload(_owner.RAM.UsedSpace - total);    // DEBUG NotEnoughMemoryException
+            }
         }
 
         public void Stop() {
@@ -58,11 +74,17 @@ namespace DOS
         }
 
         public void Install(IProgram program) {
-            throw new NotImplementedException();
+            _owner.ExternalStorage.Load(program.NeededStorage);             // DEBUG NotEnoughMemoryException
+            _programs.Add(program);
+            OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The program has been successfully installed", Title, IsEnabled));
         }
 
         public void Uninstall(IProgram program) {
-            throw new NotImplementedException();
+            if (!_programs.Contains(program))
+                throw new UnknownSoftwareException("Such program does not exist");
+            _owner.ExternalStorage.Unload(program.NeededStorage);           // DEBUG DriveIsEmptyException
+            _programs.Remove(program);
+            OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The program has been successfully uninstalled", Title, IsEnabled));
         }
     }
 }
