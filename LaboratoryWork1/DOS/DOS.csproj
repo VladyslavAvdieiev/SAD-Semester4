@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\BatteryRunOutException.cs" />
+    <Compile Include="Hardware\Battery\Battery.cs" />
+    <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
+    <Compile Include="Hardware\Battery\IBattery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Hardware\" />
     <Folder Include="Software\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
