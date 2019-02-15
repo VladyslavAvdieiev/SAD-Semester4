@@ -29,7 +29,7 @@ namespace DOS
 
         public void Enable() {
             if (!_owner.IsEnabled)
-                throw new HardwareCannotBeEnabledException("The owner device is not in progress");
+                throw new HardwareCannotBeEnabledException("The owner device is not enabled");
             if (IsEnabled)
                 throw new HardwareCannotBeEnabledException("The CPU is already enabled");
             IsEnabled = true;
