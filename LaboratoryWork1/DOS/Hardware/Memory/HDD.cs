@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DOS.Hardware.Memory
+namespace DOS
 {
     public class HDD : IExternalStorage {
          private double _usedSpace;
