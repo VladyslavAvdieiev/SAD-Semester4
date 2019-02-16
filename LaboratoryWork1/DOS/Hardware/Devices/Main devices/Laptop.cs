@@ -23,14 +23,18 @@ namespace DOS
 
         public event EventHandler<DeviceEventArgs> OnStatusChanged;
 
-        public Laptop(string title, ICPU cpu, IInternalMemory ram, IExternalStorage externalStorage,
+        public Laptop(string title, ICPU cpu, IBattery battery, IInternalMemory ram, IExternalStorage externalStorage,
             IOperatingSystem operatingSystem, bool hasElectricityConnection, bool hasNetworkConnection)
         {
             Title = title;
             CPU = cpu;
+            CPU.AddOwner(this);
+            Battery = battery;
+            Battery.AddOwner(this);
             RAM = ram;
             ExternalStorage = externalStorage;
             OperatingSystem = operatingSystem;
+            OperatingSystem.AddOwner(this);
             HasElectricityConnection = hasElectricityConnection;
             HasNetworkConnection = hasNetworkConnection;
             _externalDevices = new List<IExternalDevice>();

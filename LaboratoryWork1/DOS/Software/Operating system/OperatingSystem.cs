@@ -76,6 +76,7 @@ namespace DOS
 
         public void Install(IProgram program) {
             _owner.ExternalStorage.Load(program.NeededStorage);             // DEBUG NotEnoughMemoryException
+            program.AddOwner(this);
             _programs.Add(program);
             OnStatusChanged?.Invoke(this, new SoftwareEventArgs("The program has been successfully installed", Title, IsEnabled));
         }
