@@ -43,7 +43,6 @@ namespace DOS
         private void StartUsingRAM() {
             double total;
             while (IsEnabled) {
-                Thread.Sleep(1000);
                 total = 0d;
                 total += _owner.CPU.MemoryUsage;
                 total += _owner.OperatingSystem.MemoryUsage;
@@ -55,6 +54,7 @@ namespace DOS
                         _owner.RAM.Load(total - _owner.RAM.UsedSpace);      // DEBUG NotEnoughMemoryException
                     else
                         _owner.RAM.Unload(_owner.RAM.UsedSpace - total);    // DEBUG NotEnoughMemoryException
+                Thread.Sleep(1000);
             }
         }
 

@@ -8,12 +8,14 @@ namespace DOS
 {
     public class DeviceEventArgs : EventArgs {
         public string Message { get; }
-        public bool InProgress { get; }
+        public string Title { get; }
+        public bool IsEnabled { get; }
         public bool HasElectricityConnection { get; }
         public bool HasNetworkConnection { get; }
-        public DeviceEventArgs(string message, bool inProgress, bool hasElectricityConnection, bool hasNetworkConnection) {
+        public DeviceEventArgs(string message, string title, bool isEnabled, bool hasElectricityConnection, bool hasNetworkConnection) {
             Message = message;
-            InProgress = inProgress;
+            Title = title;
+            IsEnabled = isEnabled;
             HasElectricityConnection = hasElectricityConnection;
             HasNetworkConnection = hasNetworkConnection;
         }

@@ -46,14 +46,13 @@ namespace DOS
             IsEnabled = true;
             OperatingSystem.Run();
             if (!HasElectricityConnection)
-                StartUsingBattery();
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been enabled", IsEnabled, HasElectricityConnection, HasNetworkConnection));
+                Task.Run(() => StartUsingBattery());
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been enabled", Title, IsEnabled, HasElectricityConnection, HasNetworkConnection));
         }
 
         private void StartUsingBattery() {
             double total;
             while (IsEnabled) {
-                Thread.Sleep(1000);
                 total = 0d;
                 if (OperatingSystem.IsEnabled)
                     total += OperatingSystem.PowerUsage;
@@ -70,6 +69,7 @@ namespace DOS
                     TurnOff();
                     throw new BatteryRunOutException(e.Message, e);
                 }
+                Thread.Sleep(1000);
             }
         }
 
@@ -78,19 +78,19 @@ namespace DOS
                 throw new HardwareCannotBeDisabledException("The device is already disabled");
             IsEnabled = false;
             OperatingSystem.Stop();
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been disabled", IsEnabled, HasElectricityConnection, HasNetworkConnection));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been disabled", Title, IsEnabled, HasElectricityConnection, HasNetworkConnection));
         }
 
         public void Connect(IExternalDevice externalDevice) {
             _externalDevices.Add(externalDevice);
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected", IsEnabled, HasElectricityConnection, HasNetworkConnection));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully connected", Title, IsEnabled, HasElectricityConnection, HasNetworkConnection));
         }
 
         public void Disconnect(IExternalDevice externalDevice) {
             if (!_externalDevices.Contains(externalDevice))
                 throw new UnknownHardwareException("Such external device does not exist");
             _externalDevices.Remove(externalDevice);
-            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected", IsEnabled, HasElectricityConnection, HasNetworkConnection));
+            OnStatusChanged?.Invoke(this, new DeviceEventArgs("The device has been successfully disconnected", Title, IsEnabled, HasElectricityConnection, HasNetworkConnection));
         }
     }
 }
