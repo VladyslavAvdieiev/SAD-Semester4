@@ -35,6 +35,7 @@ namespace DOS
             ExternalStorage = externalStorage;
             OperatingSystem = operatingSystem;
             OperatingSystem.AddOwner(this);
+            ExternalStorage.Load(OperatingSystem.NeededStorage);
             HasElectricityConnection = hasElectricityConnection;
             HasNetworkConnection = hasNetworkConnection;
             _externalDevices = new List<IExternalDevice>();
