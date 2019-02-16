@@ -45,5 +45,9 @@ namespace DOS
         public void AddOwner(IDevice owner) {
             _owner = owner;
         }
+
+        public override string ToString() {
+            return $"Title:{Title} Cores:{Cores} Frequency:{Frequency}GHz MemoryUsage:{MemoryUsage}GB";
+        }
     }
 }

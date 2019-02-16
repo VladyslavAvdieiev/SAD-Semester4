@@ -14,5 +14,9 @@ namespace DOS
             Title = title;
             PowerUsage = powerUsage;
         }
+
+        public override string ToString() {
+            return $"Title:{Title} PowerUsage:{PowerUsage}mAh";
+        }
     }
 }

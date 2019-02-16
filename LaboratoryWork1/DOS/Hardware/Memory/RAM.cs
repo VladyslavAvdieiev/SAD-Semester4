@@ -43,5 +43,9 @@ namespace DOS
             UsedSpace = 0d;
             OnSpaceChanged?.Invoke(this, new MemoryEventArgs("The drive has been disposed", Title, Capacity, UsedSpace));
         }
+
+        public override string ToString() {
+            return $"Title:{Title} Capacity:{Capacity}GB";
+        }
     }
 }

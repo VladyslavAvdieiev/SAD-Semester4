@@ -47,5 +47,9 @@ namespace DOS
         public void AddOwner(IOperatingSystem owner) {
             _owner = owner;
         }
+
+        public override string ToString() {
+            return $"Title:{Title} NeedsNetworkConnection:{NeedsNetworkConnection} PowerUsage:{PowerUsage}mAh MemoryUsage:{MemoryUsage}GB NeededStorage:{NeededStorage}GB";
+        }
     }
 }

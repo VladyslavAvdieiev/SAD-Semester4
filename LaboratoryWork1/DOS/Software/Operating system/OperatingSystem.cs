@@ -92,5 +92,9 @@ namespace DOS
         public void AddOwner(IDevice owner) {
             _owner = owner;
         }
+
+        public override string ToString() {
+            return $"Title:{Title} PowerUsage:{PowerUsage}mAh MemoryUsage:{MemoryUsage}GB NeededStorage:{NeededStorage}GB";
+        }
     }
 }
