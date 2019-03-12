@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocxFileNameCreator.cs" />
     <Compile Include="DocxType.cs" />
     <Compile Include="FileNameCreator.cs" />
     <Compile Include="IFileType.cs" />
