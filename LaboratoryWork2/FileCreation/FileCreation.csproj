@@ -45,6 +45,7 @@
     <Compile Include="DocxType.cs" />
     <Compile Include="FileNameCreator.cs" />
     <Compile Include="IFileType.cs" />
+    <Compile Include="JpegFileNameCreator.cs" />
     <Compile Include="JpegType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RtfFileNameCreator.cs" />
