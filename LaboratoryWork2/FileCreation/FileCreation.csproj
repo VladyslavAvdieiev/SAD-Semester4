@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocxType.cs" />
+    <Compile Include="FileNameCreator.cs" />
     <Compile Include="IFileType.cs" />
     <Compile Include="JpegType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
