@@ -46,6 +46,7 @@
     <Compile Include="IFileType.cs" />
     <Compile Include="JpegType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RtfFileNameCreator.cs" />
     <Compile Include="RtfType.cs" />
     <Compile Include="TxtFileNameCreator.cs" />
     <Compile Include="TxtType.cs" />
