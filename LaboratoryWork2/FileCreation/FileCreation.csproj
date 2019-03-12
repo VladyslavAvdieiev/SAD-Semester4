@@ -41,17 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocxFileNameCreator.cs" />
-    <Compile Include="DocxType.cs" />
-    <Compile Include="FileNameCreator.cs" />
-    <Compile Include="IFileType.cs" />
-    <Compile Include="JpegFileNameCreator.cs" />
-    <Compile Include="JpegType.cs" />
+    <Compile Include="Creators\DocxFileNameCreator.cs" />
+    <Compile Include="File types\DocxType.cs" />
+    <Compile Include="Creators\FileNameCreator.cs" />
+    <Compile Include="File types\IFileType.cs" />
+    <Compile Include="Creators\JpegFileNameCreator.cs" />
+    <Compile Include="File types\JpegType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RtfFileNameCreator.cs" />
-    <Compile Include="RtfType.cs" />
-    <Compile Include="TxtFileNameCreator.cs" />
-    <Compile Include="TxtType.cs" />
+    <Compile Include="Creators\RtfFileNameCreator.cs" />
+    <Compile Include="File types\RtfType.cs" />
+    <Compile Include="Creators\TxtFileNameCreator.cs" />
+    <Compile Include="File types\TxtType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
