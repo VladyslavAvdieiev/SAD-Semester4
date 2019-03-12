@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace FileCreation
 {
-    public class RtfType : IType {
-        private string _name;
-        private const string _type = ".rtf";
+    public class RtfType : IFileType {
+        private const string type = ".rtf";
 
-        public RtfType(string name) {
-            _name = string.Concat(name, _type);
-        }
-
-        public string GetName() {
-            return _name;
+        public override string ToString() {
+            return type;
         }
     }
 }

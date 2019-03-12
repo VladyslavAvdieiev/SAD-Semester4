@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileCreation
 {
-    public interface IType {
-        string GetName();
+    public interface IFileType {
+        string ToString();
     }
 }

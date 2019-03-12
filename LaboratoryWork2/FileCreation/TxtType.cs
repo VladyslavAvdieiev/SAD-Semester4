@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace FileCreation
 {
-    public class TxtType : IType {
-        private string _name;
-        private const string _type = ".txt";
+    public class TxtType : IFileType {
+        private const string type = ".txt";
 
-        public TxtType(string name) {
-            _name = string.Concat(name, _type);
-        }
-
-        public string GetName() {
-            return _name;
+        public override string ToString() {
+            return type;
         }
     }
 }

@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace FileCreation
 {
-    public class DocxType : IType {
-        private string _name;
-        private const string _type = ".docx";
+    public class DocxType : IFileType {
+        private const string type = ".docx";
 
-        public DocxType(string name) {
-            _name = string.Concat(name, _type);
-        }
-
-        public string GetName() {
-            return _name;
+        public override string ToString() {
+            return type;
         }
     }
 }
