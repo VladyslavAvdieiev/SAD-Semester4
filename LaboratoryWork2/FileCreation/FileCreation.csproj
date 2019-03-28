@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creators\DocxFileNameCreator.cs" />
+    <Compile Include="File creator\FileCreator.cs" />
     <Compile Include="File types\DocxType.cs" />
     <Compile Include="Creators\FileNameCreator.cs" />
     <Compile Include="File types\IFileType.cs" />
