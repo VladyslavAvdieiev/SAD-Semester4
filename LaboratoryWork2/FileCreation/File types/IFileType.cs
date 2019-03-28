@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileCreation
+namespace FileCreation.FileTypes
 {
     public interface IFileType {
         string ToString();
