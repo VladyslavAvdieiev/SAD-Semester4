@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hardware\Devices\Main devices\DeviceEventArgs.cs" />
+    <Compile Include="Hardware\Devices\External devices\ExternalDevice.cs" />
+    <Compile Include="Hardware\CPU\CPU.cs" />
+    <Compile Include="Hardware\CPU\CPUEventArgs.cs" />
     <Compile Include="Exceptions\BatteryRunOutException.cs" />
     <Compile Include="Exceptions\DriveIsEmptyException.cs" />
     <Compile Include="Exceptions\HardwareCannotBeDisabledException.cs" />
@@ -48,11 +52,32 @@
     <Compile Include="Exceptions\NoElectricityConnectionException.cs" />
     <Compile Include="Exceptions\NoNetworkConnectionException.cs" />
     <Compile Include="Exceptions\NotEnoughMemoryException.cs" />
+    <Compile Include="Hardware\Battery\Battery.cs" />
+    <Compile Include="Hardware\Battery\BatteryEventArgs.cs" />
+    <Compile Include="Hardware\Battery\IBattery.cs" />
+    <Compile Include="Hardware\CPU\ICPU.cs" />
+    <Compile Include="Hardware\Devices\External devices\IExternalDevice.cs" />
+    <Compile Include="Hardware\Memory\HDD.cs" />
+    <Compile Include="Hardware\Memory\IExternalStorage.cs" />
+    <Compile Include="Hardware\Memory\IInternalMemory.cs" />
+    <Compile Include="Hardware\Memory\IMemory.cs" />
+    <Compile Include="Hardware\Memory\MemoryEventArgs.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IPortableDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\IStationaryDevice.cs" />
+    <Compile Include="Software\Operating system\IOperatingSystem.cs" />
+    <Compile Include="Software\Operating system\OperatingSystem.cs" />
+    <Compile Include="Software\Program\IProgram.cs" />
+    <Compile Include="Software\Program\Program.cs" />
+    <Compile Include="Software\ISoftware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeDisabledException.cs" />
     <Compile Include="Exceptions\SoftwareCannotBeEnabledException.cs" />
     <Compile Include="Exceptions\UnknownHardwareException.cs" />
     <Compile Include="Exceptions\UnknownSoftwareException.cs" />
+    <Compile Include="Hardware\Memory\RAM.cs" />
+    <Compile Include="Hardware\Memory\SSD.cs" />
+    <Compile Include="Software\SoftwareEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
