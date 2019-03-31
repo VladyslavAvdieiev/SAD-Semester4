@@ -10,34 +10,26 @@ namespace DOS
     public class Laptop : IPortableDevice {
         private List<IExternalDevice> _externalDevices;
 
-        public string Title { get; }
+        public static PortableDeviceBuilder Builder { get; }
+
+        public string Title { get; internal set; }
         public bool IsEnabled { get; private set; }
-        public ICPU CPU { get; }
-        public IBattery Battery { get; }
-        public IInternalMemory RAM { get; }
-        public IExternalStorage ExternalStorage { get; }
-        public IOperatingSystem OperatingSystem { get; }
+        public ICPU CPU { get; internal set; }
+        public IBattery Battery { get; internal set; }
+        public IInternalMemory RAM { get; internal set; }
+        public IExternalStorage ExternalStorage { get; internal set; }
+        public IOperatingSystem OperatingSystem { get; internal set; }
         public IList<IExternalDevice> ExternalDevices { get => _externalDevices.AsReadOnly(); }
         public bool HasElectricityConnection { get; set; }
         public bool HasNetworkConnection { get; set; }
 
         public event EventHandler<DeviceEventArgs> OnStatusChanged;
 
-        public Laptop(string title, ICPU cpu, IBattery battery, IInternalMemory ram, IExternalStorage externalStorage,
-            IOperatingSystem operatingSystem, bool hasElectricityConnection, bool hasNetworkConnection)
-        {
-            Title = title;
-            CPU = cpu;
-            CPU.AddOwner(this);
-            Battery = battery;
-            Battery.AddOwner(this);
-            RAM = ram;
-            ExternalStorage = externalStorage;
-            OperatingSystem = operatingSystem;
-            OperatingSystem.AddOwner(this);
-            ExternalStorage.Load(OperatingSystem.NeededStorage);
-            HasElectricityConnection = hasElectricityConnection;
-            HasNetworkConnection = hasNetworkConnection;
+        static Laptop() {
+            Builder = new LaptopBuilder();
+        }
+
+        internal Laptop() {
             _externalDevices = new List<IExternalDevice>();
         }
 

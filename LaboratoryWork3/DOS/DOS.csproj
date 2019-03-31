@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\DeviceBuilder.cs" />
+    <Compile Include="Builder\LaptopBuilder.cs" />
+    <Compile Include="Builder\PortableDeviceBuilder.cs" />
+    <Compile Include="Builder\StationaryDeviceBuilder.cs" />
     <Compile Include="Hardware\Devices\Main devices\DeviceEventArgs.cs" />
     <Compile Include="Hardware\Devices\External devices\ExternalDevice.cs" />
     <Compile Include="Hardware\CPU\CPU.cs" />
