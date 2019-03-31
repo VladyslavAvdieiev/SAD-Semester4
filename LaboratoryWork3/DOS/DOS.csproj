@@ -65,6 +65,7 @@
     <Compile Include="Hardware\Devices\Main devices\IDevice.cs" />
     <Compile Include="Hardware\Devices\Main devices\IPortableDevice.cs" />
     <Compile Include="Hardware\Devices\Main devices\IStationaryDevice.cs" />
+    <Compile Include="Hardware\Devices\Main devices\Laptop.cs" />
     <Compile Include="Software\Operating system\IOperatingSystem.cs" />
     <Compile Include="Software\Operating system\OperatingSystem.cs" />
     <Compile Include="Software\Program\IProgram.cs" />
