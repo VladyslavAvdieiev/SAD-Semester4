@@ -15,7 +15,6 @@ namespace DataAccessLayer.Repositories
         private CategoryRepository categoryRepository;
         private UserRepository userRepository;
         private PostRepository postRepository;
-        private TagRepository tagRepository;
 
         public UnitOfWork(string connectionString) {
             db = new BoardContext(connectionString);
@@ -38,19 +37,11 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public IRepository<Post> Posts{
+        public IRepository<Post> Posts {
             get {
                 if (postRepository == null)
                     postRepository = new PostRepository(db);
                 return postRepository;
-            }
-        }
-
-        public IRepository<Tag> Tags{
-            get {
-                if (tagRepository == null)
-                    tagRepository = new TagRepository(db);
-                return tagRepository;
             }
         }
 

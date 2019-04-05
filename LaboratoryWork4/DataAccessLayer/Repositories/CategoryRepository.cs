@@ -17,12 +17,12 @@ namespace DataAccessLayer.Repositories
             db = context;
         }
 
-        public IEnumerable<Category> GetAll() {
-            return db.Categories;
-        }
-
         public Category Get(int id) {
             return db.Categories.Find(id);
+        }
+
+        public IEnumerable<Category> GetAll() {
+            return db.Categories;
         }
 
         public IEnumerable<Category> Find(Func<Category, bool> predicate) {
