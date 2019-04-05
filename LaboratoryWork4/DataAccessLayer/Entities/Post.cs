@@ -14,11 +14,12 @@ namespace DataAccessLayer.Entities
         public List<Tag> Tags { get; set; }
 
         public Post() {
-
+            Tags = new List<Tag>();
         }
 
         public Post(string title) {
             Title = title;
+            Tags = new List<Tag>();
         }
 
         public override bool Equals(object obj) {
