@@ -13,8 +13,8 @@ namespace DataAccessLayer.Repositories
         private bool disposed;
         private BoardContext db;
         private CategoryRepository categoryRepository;
-        private UserRepository userRepository;
         private PostRepository postRepository;
+        private UserRepository userRepository;
 
         public UnitOfWork(string connectionString) {
             db = new BoardContext(connectionString);
@@ -29,19 +29,19 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public IRepository<User> Users {
-            get {
-                if (userRepository == null)
-                    userRepository = new UserRepository(db);
-                return userRepository;
-            }
-        }
-
         public IRepository<Post> Posts {
             get {
                 if (postRepository == null)
                     postRepository = new PostRepository(db);
                 return postRepository;
+            }
+        }
+
+        public IRepository<User> Users {
+            get {
+                if (userRepository == null)
+                    userRepository = new UserRepository(db);
+                return userRepository;
             }
         }
 
