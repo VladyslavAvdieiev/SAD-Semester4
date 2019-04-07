@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
-    class BoardService : IBoardService
+    public class BoardService : IBoardService
     {
         private bool disposed;
         private IUnitOfWork unitOfWork;
