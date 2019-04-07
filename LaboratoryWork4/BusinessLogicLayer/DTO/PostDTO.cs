@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.DTO
 {
-    public class PostDTO {
+    public class PostDTO
+    {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

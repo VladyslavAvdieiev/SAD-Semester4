@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\PostDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : class {
+    public interface IRepository<TEntity> where TEntity : class
+    {
         void Create(TEntity item);
         void Update(TEntity item);
         void Delete(TEntity item);
