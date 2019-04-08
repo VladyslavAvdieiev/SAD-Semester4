@@ -11,7 +11,7 @@ namespace DataAccessLayer.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private bool disposed;
+        private bool isDisposed;
         private BoardContext context;
         private IRepository<Category> categoryRepository;
         private IRepository<Post> postRepository;
@@ -20,7 +20,7 @@ namespace DataAccessLayer.Repositories
         public UnitOfWork(string connectionString)
         {
             context = new BoardContext(connectionString);
-            disposed = false;
+            isDisposed = false;
         }
 
         public IRepository<Category> Categories
@@ -45,10 +45,17 @@ namespace DataAccessLayer.Repositories
 
         public void Dispose()
         {
-            if (!disposed)
-                context.Dispose();
-            disposed = true;
+            Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!isDisposed && disposing)
+            {
+                context.Dispose();
+                isDisposed = true;
+            }
         }
     }
 }
