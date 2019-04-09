@@ -3,6 +3,7 @@ using BusinessLogicLayer.DTO;
 using BusinessLogicLayer.Interfaces;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,30 +12,35 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
-    public class BoardService : IBoardService
+    public class CategoryService : ICategoryService
     {
-        private bool disposed;
+        private bool isDisposed;
         private IUnitOfWork unitOfWork;
 
-        public BoardService(IUnitOfWork unitOfWork)
+        public CategoryService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            disposed = false;
+            isDisposed = false;
         }
 
-        public void CreateCategory(CategoryDTO category)
+        public void Create(CategoryDTO category)
         {
             unitOfWork.Categories.Create(new Category { Id = category.Id, Name = category.Name });
             unitOfWork.Save();
         }
 
-        public CategoryDTO GetCategory(int id)
+        public void Delete(int id)
+        {
+            unitOfWork.Categories.Delete(ctg => ctg.Id == id);
+        }
+
+        public CategoryDTO Get(int id)
         {
             var category = unitOfWork.Categories.Get(ctg => ctg.Id == id);
             return new CategoryDTO { Id = category.Id, Name = category.Name };
         }
 
-        public IEnumerable<CategoryDTO> GetAllCategories()
+        public IEnumerable<CategoryDTO> GetAll()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(unitOfWork.Categories.GetAll());
@@ -42,10 +48,17 @@ namespace BusinessLogicLayer.Services
 
         public void Dispose()
         {
-            if (!disposed)
-                unitOfWork.Dispose();
-            disposed = true;
+            Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!isDisposed && disposing)
+            {
+                unitOfWork.Dispose();
+                isDisposed = true;
+            }
         }
     }
 }
