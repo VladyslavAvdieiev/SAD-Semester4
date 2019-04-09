@@ -42,7 +42,7 @@ namespace DataAccessLayer.Repositories
 
         public TEntity Get(Func<TEntity, bool> where)
         {
-            return context.Set<TEntity>().Find(where);
+            return context.Set<TEntity>().First(where);
         }
 
         public IEnumerable<TEntity> GetAll()
