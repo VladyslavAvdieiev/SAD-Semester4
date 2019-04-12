@@ -14,7 +14,7 @@ namespace DataAccessLayer.EntityFramework
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public BoardContext(string connectionString) : base(connectionString)
+        public BoardContext() : base()
         {
 
         }

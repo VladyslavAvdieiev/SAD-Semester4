@@ -16,9 +16,9 @@ namespace UI.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var kernel = new StandardKernel(new ServiceModule("BoardTestDb"));
-            CategoryService service = kernel.Get<CategoryService>();
-            service.Dispose();
+            //var kernel = new StandardKernel(new ServiceModule("BoardTestDb"));
+            //CategoryService service = kernel.Get<CategoryService>();
+            //service.Dispose();
         }
     }
 }

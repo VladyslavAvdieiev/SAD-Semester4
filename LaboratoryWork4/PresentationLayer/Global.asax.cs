@@ -17,7 +17,7 @@ namespace PresentationLayer
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            NinjectModule serviceModule = new ServiceModule("BoardTestDb");
+            NinjectModule serviceModule = new ServiceModule();
             NinjectModule boardModule = new BoardModule();
             var kernel = new StandardKernel(serviceModule, boardModule);
 

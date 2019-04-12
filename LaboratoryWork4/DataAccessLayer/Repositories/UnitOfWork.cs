@@ -17,9 +17,9 @@ namespace DataAccessLayer.Repositories
         private IRepository<Post> postRepository;
         private IRepository<User> userRepository;
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork()
         {
-            context = new BoardContext(connectionString);
+            context = new BoardContext();
             isDisposed = false;
         }
 
