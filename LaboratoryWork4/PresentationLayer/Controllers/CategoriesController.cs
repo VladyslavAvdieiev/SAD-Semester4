@@ -16,10 +16,9 @@ namespace PresentationLayer.Controllers
     {
         private ICategoryService service;
 
-        public CategoriesController()
+        public CategoriesController(ICategoryService service)
         {
-            var kernel = new StandardKernel(new ServiceModule("BoardTestDb"));
-            service = kernel.Get<CategoryService>();
+            this.service = service;
         }
 
         public CategoryDTO Get(int id)

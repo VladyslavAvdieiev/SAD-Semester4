@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BusinessLogicLayer.Infrastructure;
+using Ninject;
+using Ninject.Modules;
+using PresentationLayer.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +16,14 @@ namespace PresentationLayer
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            NinjectModule serviceModule = new ServiceModule("BoardTestDb");
+            NinjectModule boardModule = new BoardModule();
+            var kernel = new StandardKernel(serviceModule, boardModule);
+
+            var ninjectResolver = new NinjectDependencyResolver(kernel);
+
+            GlobalConfiguration.Configuration.DependencyResolver = ninjectResolver;
         }
     }
 }
