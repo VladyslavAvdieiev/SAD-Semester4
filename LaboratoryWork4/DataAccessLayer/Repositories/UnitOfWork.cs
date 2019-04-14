@@ -14,8 +14,6 @@ namespace DataAccessLayer.Repositories
         private bool isDisposed;
         private BoardContext context;
         private IRepository<Category> categoryRepository;
-        private IRepository<Post> postRepository;
-        private IRepository<User> userRepository;
 
         public UnitOfWork()
         {
@@ -28,17 +26,7 @@ namespace DataAccessLayer.Repositories
             get => categoryRepository ?? (categoryRepository = new Repository<Category>(context));
         }
 
-        public IRepository<Post> Posts
-        {
-            get => postRepository ?? (postRepository = new Repository<Post>(context));
-        }
-
-        public IRepository<User> Users
-        {
-            get => userRepository ?? (userRepository = new Repository<User>(context));
-        }
-
-        public void Save()
+        public void Commit()
         {
             context.SaveChanges();
         }

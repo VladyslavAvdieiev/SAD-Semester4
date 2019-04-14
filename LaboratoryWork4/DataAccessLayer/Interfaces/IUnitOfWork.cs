@@ -10,8 +10,6 @@ namespace DataAccessLayer.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<Category> Categories { get; }
-        IRepository<Post> Posts { get; }
-        IRepository<User> Users { get; }
-        void Save();
+        void Commit();
     }
 }

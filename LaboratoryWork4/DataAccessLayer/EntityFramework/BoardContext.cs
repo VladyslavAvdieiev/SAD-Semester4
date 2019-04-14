@@ -11,8 +11,6 @@ namespace DataAccessLayer.EntityFramework
     public class BoardContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<User> Users { get; set; }
 
         public BoardContext() : base()
         {

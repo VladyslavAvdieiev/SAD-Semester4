@@ -25,18 +25,24 @@ namespace BusinessLogicLayer.Services
 
         public void Create(CategoryDTO category)
         {
-            unitOfWork.Categories.Create(new Category { Id = category.Id, Name = category.Name });
-            unitOfWork.Save();
+            unitOfWork.Categories.Create(new Category(category.Name));
+            unitOfWork.Commit();
+        }
+
+        public void Update(CategoryDTO category)
+        {
+            unitOfWork.Categories.Update(new Category { Id = category.Id, Name = category.Name });
+            unitOfWork.Commit();
         }
 
         public void Delete(int id)
         {
-            unitOfWork.Categories.Delete(ctg => ctg.Id == id);
+            unitOfWork.Categories.DeleteBy(ctg => ctg.Id == id);
         }
 
         public CategoryDTO Get(int id)
         {
-            var category = unitOfWork.Categories.Get(ctg => ctg.Id == id);
+            var category = unitOfWork.Categories.GetSingle(ctg => ctg.Id == id);
             return new CategoryDTO { Id = category.Id, Name = category.Name };
         }
 

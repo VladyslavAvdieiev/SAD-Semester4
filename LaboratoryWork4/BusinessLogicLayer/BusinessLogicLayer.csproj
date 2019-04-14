@@ -51,8 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\CategoryDTO.cs" />
-    <Compile Include="DTO\PostDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

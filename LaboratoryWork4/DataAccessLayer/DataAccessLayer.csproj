@@ -49,8 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\User.cs" />
     <Compile Include="EntityFramework\BoardContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

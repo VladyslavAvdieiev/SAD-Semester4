@@ -1,8 +1,10 @@
-﻿using BusinessLogicLayer.DTO;
+﻿using AutoMapper;
+using BusinessLogicLayer.DTO;
 using BusinessLogicLayer.Infrastructure;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
 using Ninject;
+using PresentationLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +23,21 @@ namespace PresentationLayer.Controllers
             this.service = service;
         }
 
-        public CategoryDTO Get(int id)
+        public CategoryViewModel Get(int id)
         {
-            return service.Get(id);
+            var category = service.Get(id);
+            return new CategoryViewModel { Name = category.Name, Id = category.Id };
         }
 
-        public IEnumerable<CategoryDTO> GetAll()
+        public IEnumerable<CategoryViewModel> GetAll()
         {
-            return service.GetAll();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CategoryDTO, CategoryViewModel>()).CreateMapper();
+            return mapper.Map<IEnumerable<CategoryDTO>, IEnumerable<CategoryViewModel>>(service.GetAll());
+        }
+
+        public void Post(CategoryViewModel category)
+        {
+            service.Create(new CategoryDTO(category.Name));
         }
 
         protected override void Dispose(bool disposing)

@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BusinessLogicLayer.DTO
+namespace PresentationLayer.Models
 {
-    public class CategoryDTO
+    public class CategoryViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public CategoryDTO()
+        public CategoryViewModel()
         {
 
         }
 
-        public CategoryDTO(string name)
+        public CategoryViewModel(string name)
         {
             Name = name;
         }
