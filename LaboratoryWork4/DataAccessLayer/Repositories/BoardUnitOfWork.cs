@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class BoardUnitOfWork : IBoardUnitOfWork
     {
         private bool isDisposed;
         private BoardContext context;
@@ -17,7 +17,7 @@ namespace DataAccessLayer.Repositories
         private IRepository<Post> postRepository;
         private IRepository<User> userRepository;
 
-        public UnitOfWork()
+        public BoardUnitOfWork()
         {
             context = new BoardContext();
             isDisposed = false;

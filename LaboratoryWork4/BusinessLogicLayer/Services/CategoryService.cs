@@ -15,9 +15,9 @@ namespace BusinessLogicLayer.Services
     public class CategoryService : ICategoryService
     {
         private bool isDisposed;
-        private IUnitOfWork unitOfWork;
+        private IBoardUnitOfWork unitOfWork;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(IBoardUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             isDisposed = false;

@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.Infrastructure
     {
         public override void Load()
         {
-            Bind<IUnitOfWork>().To<UnitOfWork>();
+            Bind<IBoardUnitOfWork>().To<BoardUnitOfWork>();
         }
     }
 }
