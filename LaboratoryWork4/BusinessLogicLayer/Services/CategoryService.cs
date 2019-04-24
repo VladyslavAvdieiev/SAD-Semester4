@@ -58,7 +58,7 @@ namespace BusinessLogicLayer.Services
             GC.SuppressFinalize(this);
         }
 
-        public virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!isDisposed && disposing)
             {

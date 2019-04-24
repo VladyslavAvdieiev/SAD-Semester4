@@ -49,7 +49,7 @@ namespace DataAccessLayer.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!isDisposed && disposing)
             {
